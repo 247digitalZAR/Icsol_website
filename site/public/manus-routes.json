@@ -1,0 +1,84 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "title": "Home"
+    },
+    {
+      "path": "/hr-health-check/",
+      "title": "HR Health Check"
+    },
+    {
+      "path": "/services/",
+      "title": "Services"
+    },
+    {
+      "path": "/services/hr-strategy/",
+      "title": "Human resource strategy"
+    },
+    {
+      "path": "/services/contracts-and-policies/",
+      "title": "Contracts and policies"
+    },
+    {
+      "path": "/services/discipline-and-ccma/",
+      "title": "Discipline and the CCMA"
+    },
+    {
+      "path": "/services/structure-culture-od/",
+      "title": "Structure, culture and organisational development"
+    },
+    {
+      "path": "/services/performance-and-incentives/",
+      "title": "Reviews and incentives"
+    },
+    {
+      "path": "/services/workforce-planning/",
+      "title": "Workforce planning"
+    },
+    {
+      "path": "/services/training-and-facilitation/",
+      "title": "Training and facilitation"
+    },
+    {
+      "path": "/services/recruitment/",
+      "title": "Recruitment"
+    },
+    {
+      "path": "/about/",
+      "title": "About and our people"
+    },
+    {
+      "path": "/insights/",
+      "title": "Insights"
+    },
+    {
+      "path": "/insights/year-end-closedown/",
+      "title": "Year-end closedown: leave, public holidays and pay over December"
+    },
+    {
+      "path": "/insights/ai-at-work-popia/",
+      "title": "AI at work: what POPIA means for your business"
+    },
+    {
+      "path": "/insights/first-disciplinary-hearing-ccma/",
+      "title": "Your first disciplinary hearing: what the CCMA will look for"
+    },
+    {
+      "path": "/insights/do-you-need-an-hr-manager/",
+      "title": "Do you need an HR manager yet? A guide by headcount"
+    },
+    {
+      "path": "/job-seekers/",
+      "title": "Job seekers"
+    },
+    {
+      "path": "/contact/",
+      "title": "Contact"
+    },
+    {
+      "path": "/privacy/",
+      "title": "Privacy"
+    }
+  ]
+}
