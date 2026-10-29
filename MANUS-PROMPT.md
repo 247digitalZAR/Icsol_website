@@ -11,14 +11,15 @@ The content and design are already approved by the client. Your job is to turn t
 ## Source files (in the attached repo)
 
 - `design-reference/index.html` and `design-reference/insights.html`: the approved demo. This is the source of truth for every word, colour, font, layout and interaction.
-- `design-reference/assets/`: CSS, JS and images used by the demo.
+- `design-reference/assets/css/site.css`: **the complete stylesheet** (tokens, layout and every component). `insights.css` adds the article layout; `effects.css` is the motion layer.
+- `design-reference/assets/`: the JS and images used by the demo.
 - `assets/`: the production images (logo, team photos, hero).
 - `BUILD-SPEC.md`: the full specification. Read it completely before you start, and follow it where it adds detail to this prompt.
 
 ## Rules
 
 1. **Copy is locked.** Use the text from the design reference word for word. Don't shorten, rephrase, add marketing copy or change spelling (South African English). Where a new page needs a heading or intro that doesn't exist in the reference, mark it `[NEW COPY: for 247 review]` so we can approve it.
-2. **Design is locked.** Match the reference: colour tokens, fonts (Young Serif, Figtree, IBM Plex Mono), spacing, the indigo and lime brand, light and dark mode, and the motion layer (with `prefers-reduced-motion` respected).
+2. **Design is locked.** Port `site.css`, `insights.css` and `effects.css` in full as your base stylesheets, then add only what new pages need. Every class used in your HTML must be styled; check this before showing me a preview. Match the reference: colour tokens, fonts (Young Serif, Figtree, IBM Plex Mono), spacing, the indigo and lime brand, light and dark mode, and the motion layer (with `prefers-reduced-motion` respected).
 3. **Split into pages** exactly as in `BUILD-SPEC.md` § Sitemap. The home page stays short and points to the HR Health Check.
 4. **Every page must be pre-rendered HTML.** No content that only appears after JavaScript runs. A static build is ideal; if you use a framework, use static generation.
 5. **Strip all demo-only elements** listed in `BUILD-SPEC.md` § Remove from the demo (the green "concept draft" ribbon, the "What's placeholder?" notes panel, the scripted demo chat answers, the demo form messages).
