@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en-ZA"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICS Insights</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/effects.css">
+<style>
+/* Layout: one long scroll in bands; a quiet navy shell, ochre used once per band to mark the action. */
+:root{
+  /* Brand: ICS logo indigo #2B2667 + lime #8BC53F. Lime is a fill colour only; text-green is the logo's shadow green, darkened for contrast. */
+  --ink:#1d174d;         /* primary text, logo shadow indigo */
+  --ink-soft:#57537a;    /* secondary text */
+  --paper:#f6f6fa;       /* page, indigo-biased neutral */
+  --surface:#ffffff;     /* cards, form, header */
+  --line:#dedcea;        /* hairlines */
+  --band:#2b2667;        /* dark bands, logo indigo */
+  --band-fg:#f1f0f8;
+  --band-soft:#bdb9dc;
+  --ochre:#8bc53f;       /* accent fill: logo lime */
+  --ochre-ink:#46732b;   /* accent text: green that passes on white */
+  --ochre-wash:#eef6e2;
+  --on-accent:#1d174d;   /* text on lime */
+  --logo-plate:transparent;
+  --ok:#2f7a55;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r:6px;
+  --wrap:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#ecebf5;--ink-soft:#a8a5c4;--paper:#100e22;--surface:#1a1736;--line:#2d2a52;
+  --band:#1f1b4d;--band-fg:#ecebf5;--band-soft:#aaa6cc;--ochre:#97cf4c;--ochre-ink:#a9d872;--ochre-wash:#1f2a16;--ok:#5fbf8c;--logo-plate:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#ecebf5;--ink-soft:#a8a5c4;--paper:#100e22;--surface:#1a1736;--line:#2d2a52;
+  --band:#1f1b4d;--band-fg:#ecebf5;--band-soft:#aaa6cc;--ochre:#97cf4c;--ochre-ink:#a9d872;--ochre-wash:#1f2a16;--ok:#5fbf8c;--logo-plate:#ffffff;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,5.4vw,4rem)}
+h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+h3{font-size:1.3rem}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre-ink)}
+.lede{font-size:1.15rem;color:var(--ink-soft);max-width:60ch}
+.btn{display:inline-flex;align-items:center;gap:.5em;padding:.85em 1.3em;border-radius:var(--r);font-weight:600;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font:inherit;font-weight:600;font-size:1rem}
+.btn-primary{background:var(--ochre);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.07)}
+.btn-ghost{border-color:currentColor;background:transparent;color:inherit}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
+section{scroll-margin-top:80px}
+.band{padding-block:clamp(56px,8vw,104px)}
+
+/* demo ribbon */
+.ribbon{background:var(--ochre-wash);color:var(--ochre-ink);font-size:.85rem;border-bottom:1px solid var(--line)}
+.ribbon .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:8px}
+.ribbon button{font:inherit;font-weight:600;background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+@media (max-width:520px){.brand img{height:46px}.brand small{display:none}}
+.brand img{height:58px;width:auto;display:block;background:var(--logo-plate);padding:3px 6px;border-radius:4px;flex:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mono{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ochre);display:grid;place-items:center;font-family:var(--f-display);font-size:1rem;color:var(--band-fg);letter-spacing:.04em;flex:none}
+.brand b{display:block;font-weight:600;font-size:.98rem;line-height:1.2}
+.brand small{display:block;color:var(--ink-soft);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;align-items:center}
+nav.main a{text-decoration:none;font-size:.95rem;color:var(--ink-soft)}
+nav.main a:hover{color:var(--ink)}
+nav.main .btn{color:var(--on-accent);padding:.6em 1em;font-size:.92rem}
+.menu-btn{display:none;background:none;border:1.5px solid var(--line);color:var(--ink);border-radius:var(--r);padding:.45em .8em;font:inherit;cursor:pointer}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  nav.main{position:absolute;left:0;right:0;top:100%;background:var(--surface);border-block:1px solid var(--line);display:none}
+  nav.main.open{display:block}
+  nav.main ul{flex-direction:column;align-items:flex-start;gap:4px;padding:12px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+  nav.main a{display:block;padding:8px 0;font-size:1.05rem}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#f4f3fa;padding-block:clamp(72px,11vw,150px) clamp(72px,10vw,140px);
+  background-color:#2b2667;
+  background-image:
+    linear-gradient(90deg,#2b2667 0%,#2b2667 32%,rgba(43,38,103,.9) 42%,rgba(43,38,103,.55) 56%,rgba(43,38,103,0) 74%),
+    linear-gradient(0deg,rgba(29,23,77,.35) 0%,rgba(29,23,77,0) 40%),
+    url("assets/img/hero-concept.jpg");
+  background-size:auto,auto,auto 100%;
+  background-position:0 0,0 0,right center;
+  background-repeat:no-repeat}
+@media (min-width:1500px){.hero{background-size:auto,auto,cover}}
+@media (max-width:760px){.hero{background-image:
+    linear-gradient(180deg,rgba(43,38,103,.92) 0%,rgba(43,38,103,.88) 55%,rgba(43,38,103,.6) 100%),
+    url("assets/img/hero-concept.jpg");background-size:auto,cover;background-position:0 0,72% center}}
+.hero-inner{position:relative;max-width:590px;text-shadow:0 1px 18px rgba(20,16,60,.45)}
+.hero .ph-tag{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:16px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px dashed rgba(255,255,255,.5);color:#fff;padding:6px 10px;border-radius:4px;max-width:calc(100% - 32px)}
+.hero .kicker{font-family:var(--f-display);font-size:clamp(1.2rem,2.2vw,1.6rem);color:#c3e58f}
+.hero h1{font-size:clamp(2rem,3.9vw,3.1rem);margin-top:14px}
+.hero .lede{color:#d9d7ec}
+.week-band{background:var(--band);color:var(--band-fg)}
+.week-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.week-grid>*{min-width:0}
+.week-band .eyebrow{color:var(--ochre)}
+.week-band .lede{color:var(--band-soft);margin-top:16px}
+@media (max-width:860px){.week-grid{grid-template-columns:1fr}}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero-grid>*{min-width:0}
+.hero h1 em{font-style:normal;color:var(--ochre)}
+.hero .lede{margin-top:20px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.hero .fine{margin-top:18px;font-size:.9rem;color:#d9d7ec}
+.weekcard{background:#ffffff0d;border:1px solid #ffffff24;border-radius:10px;padding:22px}
+.weekcard header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px}
+.weekcard header span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--band-soft)}
+.weekcard h3{font-size:1.15rem}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.log li{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:11px 0;border-top:1px solid #ffffff1c;font-size:.93rem}
+.log time{font-family:var(--f-mono);font-size:.76rem;color:var(--ochre);padding-top:2px}
+.log b{font-weight:600;display:block}
+.log span{color:var(--band-soft)}
+.weekcard footer{margin-top:12px;font-size:.78rem;color:var(--band-soft);font-style:italic}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
+
+/* proof strip */
+.proof{border-bottom:1px solid var(--line);background:var(--surface)}
+.proof .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-block:28px}
+.proof div{display:grid;gap:2px}
+.proof strong{font-family:var(--f-display);font-weight:400;font-size:1.5rem}
+.proof span{font-size:.88rem;color:var(--ink-soft)}
+@media (max-width:760px){.proof .wrap{grid-template-columns:1fr 1fr}}
+
+/* pitch */
+.pitch-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.pitch-grid>*{min-width:0}
+.pitch-grid .lede{margin-top:18px}
+.why{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.why li{display:grid;grid-template-columns:minmax(150px,.8fr) 1.2fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.why b{font-family:var(--f-display);font-weight:400;font-size:1.15rem}
+.why span{color:var(--ink-soft)}
+.ai-line{margin-top:28px;padding:20px 22px;background:var(--ochre-wash);border-radius:var(--r);font-family:var(--f-display);font-size:1.3rem;color:var(--ochre-ink)}
+@media (max-width:860px){.pitch-grid{grid-template-columns:1fr}.why li{grid-template-columns:1fr;gap:4px}}
+
+/* sizing tool */
+.sizer{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sizer-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.sizer-grid>*{min-width:0}
+.sizer .lede{margin-top:16px}
+.compare{width:100%;border-collapse:collapse;margin-top:28px;font-size:.95rem}
+.compare th,.compare td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.compare thead th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+.compare td:first-child{color:var(--ink-soft);width:34%}
+.compare td.us{font-weight:600}
+.table-scroll{overflow-x:auto}
+.tool{border:1px solid var(--line);border-radius:10px;padding:24px;background:var(--paper)}
+.tool label{font-weight:600;display:block}
+.tool output{font-family:var(--f-display);font-size:2.2rem;display:block;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.tool input[type=range]{width:100%;accent-color:var(--ochre);margin:6px 0 4px}
+.scale{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.72rem;color:var(--ink-soft)}
+.result{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.result .tag{justify-self:start;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;background:var(--ochre-wash);color:var(--ochre-ink);padding:4px 8px;border-radius:4px}
+.result h3{font-size:1.5rem}
+.result p{color:var(--ink-soft)}
+.result ul{margin:0;padding-left:1.1em;color:var(--ink-soft)}
+.tool .note{margin-top:14px;font-size:.82rem;color:var(--ink-soft)}
+@media (max-width:860px){.sizer-grid{grid-template-columns:1fr}}
+
+/* services */
+.svc-head{display:flex;justify-content:space-between;gap:24px;align-items:end;flex-wrap:wrap;margin-bottom:40px}
+.svc-head .lede{max-width:52ch}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.svc article{padding:26px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.svc .k{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;color:var(--ochre-ink);text-transform:uppercase}
+.svc p{color:var(--ink-soft);font-size:.95rem}
+.svc ul{margin:0;padding-left:1.1em;font-size:.92rem;color:var(--ink-soft)}
+.svc article.sec{background:var(--surface)}
+@media (max-width:1000px){.svc{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}}
+
+/* steps */
+.steps-band{background:var(--band);color:var(--band-fg)}
+.steps-band .eyebrow{color:var(--ochre)}
+.steps-band .lede{color:var(--band-soft);margin-top:16px}
+.steps{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s}
+.steps li{border-top:2px solid var(--ochre);padding-top:18px;display:grid;gap:10px;counter-increment:s}
+.steps li::before{content:"Step " counter(s);font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
+.steps p{color:var(--band-soft)}
+.steps .when{font-family:var(--f-mono);font-size:.78rem;color:var(--band-fg)}
+.steps-cta{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.steps-cta span{color:var(--band-soft);font-size:.92rem}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px;row-gap:12px;margin-top:40px}
+.person{display:grid;grid-row:span 4;grid-template-rows:subgrid;gap:12px;align-content:start}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center 20%;border-radius:inherit;display:block}
+.portrait:has(img){background:var(--surface)}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:var(--r);background:
+  repeating-linear-gradient(135deg,var(--line) 0 1px,transparent 1px 10px),var(--surface);
+  border:1px solid var(--line);display:grid;place-items:center;position:relative}
+.portrait span{font-family:var(--f-display);font-size:2.6rem;color:var(--ink-soft)}
+.portrait small{position:absolute;bottom:8px;left:8px;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--paper);padding:2px 6px;border-radius:3px}
+.person .role{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ochre-ink)}
+.person p{font-size:.93rem;color:var(--ink-soft)}
+.person .yrs{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
+@media (max-width:960px){.team{grid-template-columns:1fr 1fr;row-gap:12px}.person{margin-bottom:24px}}
+@media (max-width:520px){.team{grid-template-columns:1fr}}
+
+/* corporate */
+.corp{background:var(--surface);border-block:1px solid var(--line)}
+.corp-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center}
+.corp-grid>*{min-width:0}
+.corp .lede{margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;font-size:.92rem}
+@media (max-width:860px){.corp-grid{grid-template-columns:1fr}}
+
+/* insights */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.post{display:grid;gap:10px;align-content:start;padding-top:16px;border-top:1px solid var(--ink)}
+.post .meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.post p{color:var(--ink-soft);font-size:.95rem}
+.post a{font-weight:600;text-decoration-color:var(--ochre);text-underline-offset:4px}
+.magnet{margin-top:44px;display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;background:var(--ochre-wash);border-radius:10px;padding:clamp(22px,4vw,36px)}
+.magnet>*{min-width:0}
+.magnet h3{font-size:1.5rem;color:var(--ink)}
+.magnet p{color:var(--ink-soft);margin-top:8px}
+.magnet form{display:flex;gap:10px;flex-wrap:wrap}
+.magnet input{flex:1 1 200px;min-width:0}
+@media (max-width:860px){.posts{grid-template-columns:1fr}.magnet{grid-template-columns:1fr}}
+
+/* careers */
+.careers{border-block:1px solid var(--line)}
+.careers .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-block:30px}
+.careers p{color:var(--ink-soft)}
+.careers b{color:var(--ink)}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,64px)}
+.faq-grid>*{min-width:0}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--ochre-ink)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--ink-soft);max-width:62ch}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:var(--band);color:var(--band-fg)}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.contact-grid>*{min-width:0}
+.contact .eyebrow{color:var(--ochre)}
+.contact .lede{color:var(--band-soft);margin-top:16px}
+.addr{margin-top:32px;display:grid;gap:18px;font-size:.95rem}
+.addr div{display:grid;gap:2px}
+.addr .k{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--band-soft)}
+.addr .sel{user-select:all}
+form.check{background:var(--surface);color:var(--ink);border-radius:10px;padding:clamp(20px,3vw,32px);display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:.9rem}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:.7em .8em;width:100%}
+textarea{min-height:96px;resize:vertical}
+.consent{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:.85rem;color:var(--ink-soft);align-items:start}
+.consent input{width:auto;margin-top:4px;accent-color:var(--ochre)}
+.form-ok{background:var(--ochre-wash);color:var(--ink);border-radius:var(--r);padding:16px}
+.form-ok b{color:var(--ok)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+footer.site{background:var(--band);color:var(--band-soft);border-top:1px solid #ffffff1a;font-size:.85rem}
+footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:24px}
+footer.site a{color:var(--band-fg)}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.quote{border:1.5px dashed var(--line);border-radius:10px;padding:24px;display:grid;gap:14px;align-content:start;background:var(--surface)}
+.quote p{font-family:var(--f-display);font-size:1.15rem;color:var(--ink-soft)}
+.quote span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre-ink)}
+@media (max-width:860px){.quotes{grid-template-columns:1fr}}
+
+/* demo notes drawer */
+.notes{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:70;width:min(380px,calc(100vw - 32px));max-height:70vh;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 18px 40px #0003;padding:20px}
+.notes h3{font-size:1.15rem}
+.notes ol{margin:12px 0 0;padding-left:1.2em;display:grid;gap:8px;font-size:.88rem;color:var(--ink-soft)}
+.notes b{color:var(--ink)}
+.notes .x{float:right;background:none;border:0;font:inherit;font-weight:600;color:var(--ochre-ink);cursor:pointer}
+</style>
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+nav.main a.cur{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:6px;text-decoration-thickness:2px}
+.ins-hero{background:var(--band);color:var(--band-fg);padding-block:clamp(48px,7vw,88px)}
+.ins-hero .eyebrow{color:var(--ochre)}
+.ins-hero h1{margin-top:12px;max-width:20ch}
+.ins-hero .lede{color:var(--band-soft);margin-top:16px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.chip{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}
+.chip.on{background:var(--band);border-color:var(--band);color:var(--band-fg)}
+.feature{display:grid;grid-template-columns:.8fr 1.2fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;background:var(--surface);margin-bottom:28px}
+.feature>*{min-width:0}
+.feature-art{background:var(--band);color:var(--band-fg);display:grid;place-content:center;gap:6px;text-align:center;padding:40px 20px;font-family:var(--f-mono);letter-spacing:.14em;font-size:.8rem}
+.feature-art b{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,4vw,3rem);letter-spacing:0;color:var(--ochre)}
+.feature-body{padding:clamp(22px,3vw,36px);display:grid;gap:12px;align-content:center}
+.feature-body h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+.feature-body p{color:var(--ink-soft)}
+.meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre-ink)}
+.more{font-weight:600;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:4px}
+.feature:hover h2,.card:hover h3{text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:5px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{display:grid;gap:10px;align-content:start;padding:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:inherit}
+.card p{color:var(--ink-soft);font-size:.95rem}
+.card.soon{background:transparent;border-style:dashed}
+.card.soon .meta{color:var(--ink-soft)}
+.empty{color:var(--ink-soft)}
+@media (max-width:900px){.cards{grid-template-columns:1fr 1fr}.feature{grid-template-columns:1fr}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}}
+.read{max-width:760px}
+.back{display:inline-block;margin-bottom:24px;font-weight:600;text-decoration:none;color:var(--ochre-ink)}
+.read h1{font-size:clamp(2rem,4vw,2.9rem);margin-top:10px}
+.standfirst{font-size:1.2rem;color:var(--ink-soft);margin-top:18px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.read h2{font-size:1.45rem;margin-top:36px;margin-bottom:10px}
+.read p+p{margin-top:14px}
+.read ul,.read ol{padding-left:1.2em;display:grid;gap:8px;margin:12px 0}
+.steps-list li b{color:var(--ink)}
+.dates{width:100%;border-collapse:collapse;margin:12px 0 16px;font-variant-numeric:tabular-nums}
+.dates th,.dates td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+.dates th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+.checklist{margin-top:36px;background:var(--ochre-wash);border-radius:10px;padding:24px}
+.checklist h3{font-size:1.25rem}
+.checklist ul{list-style:none;padding:0}
+.checklist li{padding-left:28px;position:relative}
+.checklist li::before{content:"";position:absolute;left:0;top:.35em;width:16px;height:16px;border:2px solid var(--ochre-ink);border-radius:3px}
+.post-cta{margin-top:36px;background:var(--band);color:var(--band-fg);border-radius:10px;padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.post-cta>div{flex:1 1 300px;min-width:0}
+.post-cta p{color:var(--band-soft);margin-top:6px}
+.disclaimer{margin-top:24px;font-size:.85rem;color:var(--ink-soft)}
+.magnet-band{background:var(--surface);border-top:1px solid var(--line)}
+.magnet-band .magnet{margin-top:0}
+</style>
+</head><body>
+<div class="ribbon"><div class="wrap"><span>Concept draft v3 by 247 Digital for ICS review. Articles are drafts for ICS to check before publishing.</span></div></div>
+<header class="site"><div class="wrap">
+  <a class="brand" href="./"><img src="assets/img/ics-logo.png" alt="ICS logo" width="113" height="40"><span><b>Intrinsic Consulting Solutions</b><small>Outsourced HR · Est. 2017</small></span></a>
+  <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav class="main" id="nav" aria-label="Main"><ul>
+    <li><a href="./#how">How it works</a></li>
+    <li><a href="./#services">Services</a></li>
+    <li><a href="./#team">Our people</a></li>
+    <li><a href="insights.html" aria-current="page" class="cur">Insights</a></li>
+    <li><a href="./#careers">Job seekers</a></li>
+    <li><a class="btn btn-primary" href="./#contact">Book an HR Health Check</a></li>
+  </ul></nav>
+</div></header>
+<main id="top">
+
+<section class="ins-hero">
+  <div class="wrap">
+    <p class="eyebrow">Insights</p>
+    <h1 data-split>Plain-English HR for South African business owners.</h1>
+    <p class="lede">Practical guidance on the people side of running a small or medium business: what the law expects, what goes wrong, and what to do about it.</p>
+  </div>
+</section>
+
+<!-- Index view -->
+<section class="band ins-index" id="index-view">
+  <div class="wrap">
+    <div class="filters" role="group" aria-label="Filter by topic">
+      <button type="button" class="chip on" data-f="all">All topics</button>
+      <button type="button" class="chip" data-f="compliance">Compliance</button>
+      <button type="button" class="chip" data-f="er">Employee relations</button>
+      <button type="button" class="chip" data-f="growing">Growing a team</button>
+      <button type="button" class="chip" data-f="ai">AI &amp; the workplace</button>
+    </div>
+
+    <a class="feature" href="#year-end" data-cat="compliance">
+      <div class="feature-art" aria-hidden="true"><span>DEC</span><b>16 · 25 · 26</b><span>JAN 1</span></div>
+      <div class="feature-body">
+        <span class="meta">Compliance · 5 min read · Featured</span>
+        <h2>Year-end closedown: leave, public holidays and pay over December</h2>
+        <p>Shutdown leave, the Day of Goodwill falling on a Saturday, and who gets paid what if they work on the 16th. A practical checklist for the next six weeks.</p>
+        <span class="more">Read the article</span>
+      </div>
+    </a>
+
+    <div class="cards">
+      <a class="card" href="#ai-popia" data-cat="ai"><span class="meta">AI &amp; the workplace · 6 min</span><h3>AI at work: what POPIA means for your business</h3><p>Staff pasting client details into chatbots, smart glasses in meetings, AI screening CVs. The law hasn't changed. The risks have.</p><span class="more">Read the article</span></a>
+      <a class="card" href="#ccma-hearing" data-cat="er"><span class="meta">Employee relations · 6 min</span><h3>Your first disciplinary hearing: what the CCMA will look for</h3><p>A fair reason and a fair process. The steps owners skip most often, and why skipping them costs more than the hearing.</p><span class="more">Read the article</span></a>
+      <a class="card" href="#hr-manager" data-cat="growing"><span class="meta">Growing a team · 4 min</span><h3>Do you need an HR manager yet? A guide by headcount</h3><p>What changes at 10, 25 and 50 employees, and the point at which DIY HR starts costing more than it saves.</p><span class="more">Read the article</span></a>
+      <div class="card soon" data-cat="compliance"><span class="meta">Compliance · Coming soon</span><h3>Employment contracts: the clauses most small business contracts are missing</h3><p>Probation, restraint of trade, remote work and POPIA consent. What to check in the contracts you already have.</p></div>
+      <div class="card soon" data-cat="compliance"><span class="meta">Compliance · Coming soon</span><h3>What's changing in South African labour law</h3><p>A plain-English round-up of recent and upcoming changes, and what each one means for a business with 5 to 50 people.</p></div>
+    </div>
+    <p class="empty" id="empty" hidden>No articles in this topic yet.</p>
+  </div>
+</section>
+
+<!-- Article views -->
+<article class="band post-view" id="year-end" hidden>
+  <div class="wrap read">
+    <a class="back" href="#all">← All insights</a>
+    <span class="meta">Compliance · 5 min read</span>
+    <h1>Year-end closedown: leave, public holidays and pay over December</h1>
+    <p class="standfirst">December is when small businesses make the most avoidable HR mistakes: leave forced on people who don't have it, public holidays paid wrongly, and contracts that quietly roll over. Here is what to sort out before the office closes.</p>
+
+    <h2>1. Tell staff the closedown dates in writing, now</h2>
+    <p>If you close between Christmas and New Year, staff need to know the dates early enough to plan. Put the dates in writing and say how the days will be treated: annual leave, paid closedown days on the business, or a mix.</p>
+
+    <h2>2. You can decide when leave is taken, within limits</h2>
+    <p>The Basic Conditions of Employment Act gives full-time employees at least 21 consecutive days of annual leave per leave cycle, which is 15 working days for a five-day week. Where there's no agreement on timing, the employer may decide when leave is taken. A closedown clause in your contracts or leave policy makes this far easier to apply fairly, so check yours says so.</p>
+    <p>For staff who don't have enough leave to cover the shutdown, you can agree to advance leave or agree on unpaid days. The key word is agree. Don't simply deduct the days from pay: deductions generally need the employee's written consent.</p>
+
+    <h2>3. Know the public holidays in the period</h2>
+    <div class="table-scroll"><table class="dates">
+      <thead><tr><th>Date</th><th>Holiday</th><th>Falls on</th></tr></thead>
+      <tbody>
+        <tr><td>16 Dec 2026</td><td>Day of Reconciliation</td><td>Wednesday</td></tr>
+        <tr><td>25 Dec 2026</td><td>Christmas Day</td><td>Friday</td></tr>
+        <tr><td>26 Dec 2026</td><td>Day of Goodwill</td><td>Saturday</td></tr>
+        <tr><td>1 Jan 2027</td><td>New Year's Day</td><td>Friday</td></tr>
+      </tbody>
+    </table></div>
+    <p>Only a public holiday that falls on a Sunday moves to the Monday. The Day of Goodwill falls on a Saturday this year, so it doesn't move: staff who normally work Saturdays get it as a paid holiday, and Monday-to-Friday staff don't get an extra day off.</p>
+    <p>If a public holiday falls during someone's annual leave on a day they would normally have worked, it doesn't count as a leave day.</p>
+
+    <h2>4. Working on a public holiday is by agreement, and costs more</h2>
+    <p>Staff can only be required to work on a public holiday by agreement. If the holiday falls on a day they would ordinarily work, pay is at least double their normal daily wage. If you trade over the festive season, agree the roster in writing now rather than on the 15th.</p>
+
+    <h2>5. Bonuses and 13th cheques</h2>
+    <p>The law doesn't require a year-end bonus. It becomes an obligation when it's in the contract, or when it has been paid consistently enough to become an established practice. If you're changing what you pay this year, explain it early and apply it consistently across the team.</p>
+
+    <h2>6. Fixed-term contracts that end in December</h2>
+    <p>A contract that has been renewed before, or where the person was told they'd probably be kept on, can create a reasonable expectation of renewal. Not renewing it can then be treated as a dismissal. Decide now, and communicate the decision properly.</p>
+
+    <div class="checklist">
+      <h3>Your year-end checklist</h3>
+      <ul>
+        <li>Closedown dates confirmed and sent to staff in writing</li>
+        <li>Leave balances checked; shortfalls agreed with each person</li>
+        <li>Festive season roster agreed, with public holiday pay calculated</li>
+        <li>Bonus position decided and communicated</li>
+        <li>Fixed-term contracts ending in December reviewed</li>
+        <li>Emergency contact for HR issues over the break agreed</li>
+      </ul>
+    </div>
+
+    <aside class="post-cta"><div><h3>Not sure your leave policy covers a closedown?</h3><p>An HR Health Check reviews your contracts and policies and tells you what to fix first. Results in about 2 days.</p></div><a class="btn btn-primary" href="./#contact">Book an HR Health Check</a></aside>
+    <p class="disclaimer">This article is general information, not legal advice. Every business is different; speak to us about your situation.</p>
+  </div>
+</article>
+
+<article class="band post-view" id="ai-popia" hidden>
+  <div class="wrap read">
+    <a class="back" href="#all">← All insights</a>
+    <span class="meta">AI &amp; the workplace · 6 min read</span>
+    <h1>AI at work: what POPIA means for your business</h1>
+    <p class="standfirst">Most of the worry about AI at work is whether it will take people's jobs. The more immediate risk for a small business is simpler: what your staff are putting into AI tools, and what AI devices are recording. The law hasn't changed. The tools have.</p>
+
+    <h2>Your team is probably already using AI</h2>
+    <p>If someone pastes a client email, a CV or a disciplinary note into a chatbot to "tidy it up", your business has just processed personal information through a third party, often on servers outside South Africa. The Protection of Personal Information Act (POPIA) applies to that exactly as it applies to your filing cabinet.</p>
+    <p>POPIA requires personal information to be processed lawfully, for a specific purpose, and kept secure. It also places conditions on sending personal information outside the country. A free AI tool with unclear data terms can make all three hard to show.</p>
+
+    <h2>Wearable AI changes what "being recorded" means</h2>
+    <p>Smart glasses and AI recording pins can capture faces, voices and conversations without anyone noticing. A person's image and voice are personal information, and biometric information is treated as special personal information under POPIA, with stricter rules. If staff wear these devices in meetings with clients or colleagues, you need a clear rule on when that's allowed and how people are told.</p>
+
+    <h2>AI in recruitment needs a human in the loop</h2>
+    <p>Tools that score or filter CVs automatically are attractive when you're hiring on a small budget. POPIA restricts decisions about a person that are based solely on automated processing where they have legal consequences or substantially affect that person. Use AI to help sort, but make sure a person reviews and makes the decision, and keep a record of why.</p>
+
+    <h2>What the risk looks like</h2>
+    <p>The Information Regulator can impose administrative fines of up to R10 million, and some POPIA offences carry prison sentences. For most small businesses the bigger cost is reputational: a client finding out their details were fed into a public AI tool.</p>
+
+    <div class="checklist">
+      <h3>Five things to put in place</h3>
+      <ul>
+        <li>An AI use policy: which tools are approved, and what information must never go into them</li>
+        <li>A rule on recording devices, including smart glasses, in meetings</li>
+        <li>Updated privacy notices for staff and job applicants that mention AI tools</li>
+        <li>A person reviewing every AI-assisted hiring or disciplinary decision</li>
+        <li>Your Information Officer registered with the Information Regulator, and staff knowing who it is</li>
+      </ul>
+    </div>
+
+    <aside class="post-cta"><div><h3>Want an AI use policy that fits your business?</h3><p>We'll review what your team uses today and draft a policy staff will actually follow. Start with an HR Health Check.</p></div><a class="btn btn-primary" href="./#contact">Book an HR Health Check</a></aside>
+    <p class="disclaimer">This article is general information, not legal advice. Every business is different; speak to us about your situation.</p>
+  </div>
+</article>
+
+<article class="band post-view" id="ccma-hearing" hidden>
+  <div class="wrap read">
+    <a class="back" href="#all">← All insights</a>
+    <span class="meta">Employee relations · 6 min read</span>
+    <h1>Your first disciplinary hearing: what the CCMA will look for</h1>
+    <p class="standfirst">When a dismissal is challenged at the CCMA, the commissioner asks two questions. Was there a fair reason? And was the process fair? Owners often get the first right and lose on the second.</p>
+
+    <h2>Before the hearing: is there a fair reason?</h2>
+    <p>For misconduct, the questions are practical. Was there a rule? Did the employee know about it, or should they reasonably have known? Did they break it? Have you applied the same rule the same way to others? And is dismissal an appropriate response, or would a warning do? For a first, minor offence, the answer is usually a warning.</p>
+    <p>Poor performance is not misconduct. It needs a different process: clear standards, feedback, support and time to improve before dismissal is on the table.</p>
+
+    <h2>The process: the steps that matter</h2>
+    <ol class="steps-list">
+      <li><b>Investigate first.</b> Collect the facts and statements before deciding there's a case.</li>
+      <li><b>Give written notice of the allegations</b> in a language the employee understands, with the date and time of the hearing.</li>
+      <li><b>Allow reasonable time to prepare.</b> Not the same afternoon.</li>
+      <li><b>Allow representation</b> by a fellow employee or, where there's a union, a shop steward.</li>
+      <li><b>Use an impartial chairperson.</b> The person who made the complaint shouldn't decide the outcome.</li>
+      <li><b>Let the employee state their case</b>, call witnesses and question yours.</li>
+      <li><b>Give the decision and reasons in writing</b>, and tell the employee they may refer a dispute to the CCMA or bargaining council within 30 days of dismissal.</li>
+    </ol>
+
+    <h2>The mistakes we see most</h2>
+    <ul>
+      <li>The owner chairs a hearing about their own complaint</li>
+      <li>No minutes or record of what was said</li>
+      <li>Dismissing for something others have been warned for</li>
+      <li>Treating poor performance as misconduct</li>
+      <li>Deciding the outcome before the hearing starts</li>
+    </ul>
+    <p>The Code of Good Practice: Dismissal allows a less formal process for small businesses. It does not remove the need for a fair reason and a genuine chance for the employee to respond.</p>
+
+    <aside class="post-cta"><div><h3>Facing a disciplinary matter now?</h3><p>Our HR executives prepare hearings, chair them independently and help you get the paperwork right. Talk to us before you act.</p></div><a class="btn btn-primary" href="./#contact">Book an HR Health Check</a></aside>
+    <p class="disclaimer">This article is general information, not legal advice. Every business is different; speak to us about your situation.</p>
+  </div>
+</article>
+
+<article class="band post-view" id="hr-manager" hidden>
+  <div class="wrap read">
+    <a class="back" href="#all">← All insights</a>
+    <span class="meta">Growing a team · 4 min read</span>
+    <h1>Do you need an HR manager yet? A guide by headcount</h1>
+    <p class="standfirst">Most owners don't decide to get HR help. A problem decides for them: a CCMA referral, a key resignation, a team that stopped pulling together. Here is what usually changes as a business grows.</p>
+
+    <h2>Up to about 10 people</h2>
+    <p>The owner handles HR, and that's usually fine if the basics are in place. Every employee needs written particulars of employment, and you need to be registered for UIF and COIDA. Get a sound contract, a leave policy and a disciplinary code in place now; fixing them later is harder.</p>
+
+    <h2>10 to 25 people</h2>
+    <p>This is where DIY HR starts to strain. You now have managers who aren't the owner, roles that overlap, and performance issues that need a process. Job descriptions, probation reviews and a simple performance framework start paying for themselves. A few hours a week of experienced HR support is often enough.</p>
+
+    <h2>25 to 50 people</h2>
+    <p>Structure becomes the issue: who reports to whom, how pay decisions are made, and how you keep the culture as you hire. Employee relations matters take more time. Most businesses at this size benefit from a regular HR day or two each week.</p>
+
+    <h2>50 to 100 people</h2>
+    <p>Employment equity obligations apply to employers with 50 or more employees, including an employment equity plan and annual reports. HR becomes a standing function rather than an occasional task: policies, compliance reporting, workforce planning and steady recruitment. Many businesses at this size choose outsourced HR around three days a week, backed by specialists for labour law and IR, rather than building a department.</p>
+
+    <h2>100 to 250 people</h2>
+    <p>At this size HR needs a dedicated lead: someone on site most days who runs performance, employee relations and training, and reports to management every month. You can hire that person and build a team around them, or outsource the whole function: a dedicated HR lead four to five days a week, with labour law, IR and recruitment specialists behind them, without the cost of a full department.</p>
+
+    <h2>250 people and more</h2>
+    <p>Most businesses this size have an in-house HR team. The gaps tend to be project work and specialist depth: restructuring, union negotiations, executive search, or cover during a vacancy. That's where outside HR support adds the most.</p>
+
+    <h2>The cost comparison</h2>
+    <p>A full-time HR manager typically costs R25,000 to R45,000 or more a month in salary alone. A fractional HR executive gives you senior experience for the days you actually need, on a fixed monthly fee, and scales up or down as you grow.</p>
+
+    <aside class="post-cta"><div><h3>Where does your business sit?</h3><p>An HR Health Check tells you what's in place, what's missing and how much support makes sense for your size.</p></div><a class="btn btn-primary" href="./#contact">Book an HR Health Check</a></aside>
+    <p class="disclaimer">This article is general information, not legal advice. Every business is different; speak to us about your situation.</p>
+  </div>
+</article>
+
+<section class="band magnet-band">
+  <div class="wrap">
+    <div class="magnet">
+      <div><h3>The small business HR compliance checklist</h3><p>Twenty questions to check your contracts, policies and records against the BCEA, LRA, EEA and POPIA. Free download.</p></div>
+      <form id="magnet-form" novalidate>
+        <label for="mag-email" style="position:absolute;left:-9999px">Work email</label>
+        <input id="mag-email" type="email" placeholder="Your work email" required>
+        <button class="btn btn-primary" type="submit">Send me the checklist</button>
+        <p id="mag-msg" hidden style="flex-basis:100%;font-size:.9rem;color:var(--ink-soft)"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<script>
+(function(){
+  var btn=document.getElementById('menu-btn'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+  var ids=['year-end','ai-popia','ccma-hearing','hr-manager'];
+  function route(){
+    var h=(location.hash||'').slice(1),isPost=ids.indexOf(h)>-1;
+    document.getElementById('index-view').hidden=isPost;
+    ids.forEach(function(id){document.getElementById(id).hidden=id!==h});
+    if(isPost||h==='all'){window.scrollTo(0,isPost?document.querySelector('.ins-hero').offsetHeight:0)}
+  }
+  window.addEventListener('hashchange',route);route();
+  var chips=document.querySelectorAll('.chip'),items=document.querySelectorAll('[data-cat]');
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    chips.forEach(function(x){x.classList.toggle('on',x===c)});
+    var f=c.dataset.f,n=0;
+    items.forEach(function(it){var show=f==='all'||it.dataset.cat===f;it.hidden=!show;if(show)n++});
+    document.getElementById('empty').hidden=n>0;
+  })});
+  document.getElementById('magnet-form').addEventListener('submit',function(e){
+    e.preventDefault();var em=document.getElementById('mag-email'),m=document.getElementById('mag-msg');m.hidden=false;
+    m.textContent=em.checkValidity()?'Demo only: in the live site the checklist is emailed and the contact is added to the CRM.':'Enter a valid email address.';
+  });
+})();
+</script>
+<script>
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="./#"]');if(a){try{sessionStorage.setItem('ics-jump',a.getAttribute('href').slice(2))}catch(err){}}});
+</script>
+<script src="assets/js/effects.js" defer></script>
+<script src="assets/js/chat.js" defer></script>
+</body></html>

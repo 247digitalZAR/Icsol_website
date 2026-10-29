@@ -1,0 +1,656 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Intrinsic Consulting Solutions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/effects.css">
+<style>
+/* Layout: one long scroll in bands; a quiet navy shell, ochre used once per band to mark the action. */
+:root{
+  /* Brand: ICS logo indigo #2B2667 + lime #8BC53F. Lime is a fill colour only; text-green is the logo's shadow green, darkened for contrast. */
+  --ink:#1d174d;         /* primary text, logo shadow indigo */
+  --ink-soft:#57537a;    /* secondary text */
+  --paper:#f6f6fa;       /* page, indigo-biased neutral */
+  --surface:#ffffff;     /* cards, form, header */
+  --line:#dedcea;        /* hairlines */
+  --band:#2b2667;        /* dark bands, logo indigo */
+  --band-fg:#f1f0f8;
+  --band-soft:#bdb9dc;
+  --ochre:#8bc53f;       /* accent fill: logo lime */
+  --ochre-ink:#46732b;   /* accent text: green that passes on white */
+  --ochre-wash:#eef6e2;
+  --on-accent:#1d174d;   /* text on lime */
+  --logo-plate:transparent;
+  --ok:#2f7a55;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r:6px;
+  --wrap:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#ecebf5;--ink-soft:#a8a5c4;--paper:#100e22;--surface:#1a1736;--line:#2d2a52;
+  --band:#1f1b4d;--band-fg:#ecebf5;--band-soft:#aaa6cc;--ochre:#97cf4c;--ochre-ink:#a9d872;--ochre-wash:#1f2a16;--ok:#5fbf8c;--logo-plate:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#ecebf5;--ink-soft:#a8a5c4;--paper:#100e22;--surface:#1a1736;--line:#2d2a52;
+  --band:#1f1b4d;--band-fg:#ecebf5;--band-soft:#aaa6cc;--ochre:#97cf4c;--ochre-ink:#a9d872;--ochre-wash:#1f2a16;--ok:#5fbf8c;--logo-plate:#ffffff;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,5.4vw,4rem)}
+h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+h3{font-size:1.3rem}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre-ink)}
+.lede{font-size:1.15rem;color:var(--ink-soft);max-width:60ch}
+.btn{display:inline-flex;align-items:center;gap:.5em;padding:.85em 1.3em;border-radius:var(--r);font-weight:600;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font:inherit;font-weight:600;font-size:1rem}
+.btn-primary{background:var(--ochre);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.07)}
+.btn-ghost{border-color:currentColor;background:transparent;color:inherit}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
+section{scroll-margin-top:80px}
+.band{padding-block:clamp(56px,8vw,104px)}
+
+/* demo ribbon */
+.ribbon{background:var(--ochre-wash);color:var(--ochre-ink);font-size:.85rem;border-bottom:1px solid var(--line)}
+.ribbon .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:8px}
+.ribbon button{font:inherit;font-weight:600;background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+@media (max-width:520px){.brand img{height:46px}.brand small{display:none}}
+.brand img{height:58px;width:auto;display:block;background:var(--logo-plate);padding:3px 6px;border-radius:4px;flex:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mono{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ochre);display:grid;place-items:center;font-family:var(--f-display);font-size:1rem;color:var(--band-fg);letter-spacing:.04em;flex:none}
+.brand b{display:block;font-weight:600;font-size:.98rem;line-height:1.2}
+.brand small{display:block;color:var(--ink-soft);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:22px;align-items:center}
+nav.main a{text-decoration:none;font-size:.95rem;color:var(--ink-soft)}
+nav.main a:hover{color:var(--ink)}
+nav.main .btn{color:var(--on-accent);padding:.6em 1em;font-size:.92rem}
+.menu-btn{display:none;background:none;border:1.5px solid var(--line);color:var(--ink);border-radius:var(--r);padding:.45em .8em;font:inherit;cursor:pointer}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  nav.main{position:absolute;left:0;right:0;top:100%;background:var(--surface);border-block:1px solid var(--line);display:none}
+  nav.main.open{display:block}
+  nav.main ul{flex-direction:column;align-items:flex-start;gap:4px;padding:12px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+  nav.main a{display:block;padding:8px 0;font-size:1.05rem}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#f4f3fa;padding-block:clamp(72px,11vw,150px) clamp(72px,10vw,140px);
+  background:#2b2667}
+.hero::before{content:"";position:absolute;top:0;bottom:0;right:0;left:36%;
+  background:linear-gradient(0deg,rgba(29,23,77,.3) 0%,rgba(29,23,77,0) 35%),url("assets/img/hero-concept.jpg") 72% center/cover no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.55) 22%,#000 48%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.55) 22%,#000 48%)}
+@media (max-width:760px){.hero::before{left:0;
+  background:linear-gradient(180deg,rgba(43,38,103,.9) 0%,rgba(43,38,103,.86) 60%,rgba(43,38,103,.55) 100%),url("assets/img/hero-concept.jpg") 70% center/cover no-repeat;
+  -webkit-mask-image:none;mask-image:none}}
+.hero-inner{position:relative;max-width:590px;text-shadow:0 1px 18px rgba(20,16,60,.45)}
+.hero .ph-tag{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:16px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px dashed rgba(255,255,255,.5);color:#fff;padding:6px 10px;border-radius:4px;max-width:calc(100% - 32px)}
+.hero .kicker{font-family:var(--f-display);font-size:clamp(1.2rem,2.2vw,1.6rem);color:#c3e58f}
+.hero h1{font-size:clamp(2rem,3.9vw,3.1rem);margin-top:14px}
+.hero .lede{color:#d9d7ec}
+.week-band{background:var(--band);color:var(--band-fg)}
+.week-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.week-grid>*{min-width:0}
+.week-band .eyebrow{color:var(--ochre)}
+.week-band .lede{color:var(--band-soft);margin-top:16px}
+@media (max-width:860px){.week-grid{grid-template-columns:1fr}}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero-grid>*{min-width:0}
+.hero h1 em{font-style:normal;color:var(--ochre)}
+.hero .lede{margin-top:20px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.hero .fine{margin-top:18px;font-size:.9rem;color:#d9d7ec}
+.weekcard{background:#ffffff0d;border:1px solid #ffffff24;border-radius:10px;padding:22px}
+.weekcard header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px}
+.weekcard header span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--band-soft)}
+.weekcard h3{font-size:1.15rem}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.log li{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:11px 0;border-top:1px solid #ffffff1c;font-size:.93rem}
+.log time{font-family:var(--f-mono);font-size:.76rem;color:var(--ochre);padding-top:2px}
+.log b{font-weight:600;display:block}
+.log span{color:var(--band-soft)}
+.weekcard footer{margin-top:12px;font-size:.78rem;color:var(--band-soft);font-style:italic}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}}
+
+/* proof strip */
+.proof{border-bottom:1px solid var(--line);background:var(--surface)}
+.proof .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-block:28px}
+.proof div{display:grid;gap:2px}
+.proof strong{font-family:var(--f-display);font-weight:400;font-size:1.5rem}
+.proof span{font-size:.88rem;color:var(--ink-soft)}
+@media (max-width:760px){.proof .wrap{grid-template-columns:1fr 1fr}}
+
+/* pitch */
+.pitch-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.pitch-grid>*{min-width:0}
+.pitch-grid .lede{margin-top:18px}
+.why{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.why li{display:grid;grid-template-columns:minmax(150px,.8fr) 1.2fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.why b{font-family:var(--f-display);font-weight:400;font-size:1.15rem}
+.why span{color:var(--ink-soft)}
+.ai-line{margin-top:28px;padding:20px 22px;background:var(--ochre-wash);border-radius:var(--r);font-family:var(--f-display);font-size:1.3rem;color:var(--ochre-ink)}
+@media (max-width:860px){.pitch-grid{grid-template-columns:1fr}.why li{grid-template-columns:1fr;gap:4px}}
+
+/* sizing tool */
+.sizer{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sizer-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.sizer-grid>*{min-width:0}
+.sizer .lede{margin-top:16px}
+.compare{width:100%;border-collapse:collapse;margin-top:28px;font-size:.95rem}
+.compare th,.compare td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.compare thead th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+.compare td:first-child{color:var(--ink-soft);width:34%}
+.compare td.us{font-weight:600}
+.table-scroll{overflow-x:auto}
+.tool{border:1px solid var(--line);border-radius:10px;padding:24px;background:var(--paper)}
+.tool label{font-weight:600;display:block}
+.tool output{font-family:var(--f-display);font-size:2.2rem;display:block;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.tool input[type=range]{width:100%;accent-color:var(--ochre);margin:6px 0 4px}
+.scale{position:relative;height:1.3em;font-family:var(--f-mono);font-size:.72rem;color:var(--ink-soft)}
+.scale span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.scale span:first-child{transform:none}.scale span:last-child{transform:translateX(-100%)}
+.result{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:10px}
+.result .tag{justify-self:start;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;background:var(--ochre-wash);color:var(--ochre-ink);padding:4px 8px;border-radius:4px}
+.result h3{font-size:1.5rem}
+.result p{color:var(--ink-soft)}
+.result ul{margin:0;padding-left:1.1em;color:var(--ink-soft)}
+.tool .note{margin-top:14px;font-size:.82rem;color:var(--ink-soft)}
+@media (max-width:860px){.sizer-grid{grid-template-columns:1fr}}
+
+/* services */
+.svc-head{display:flex;justify-content:space-between;gap:24px;align-items:end;flex-wrap:wrap;margin-bottom:40px}
+.svc-head .lede{max-width:52ch}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.svc article{padding:26px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.svc .k{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;color:var(--ochre-ink);text-transform:uppercase}
+.svc p{color:var(--ink-soft);font-size:.95rem}
+.svc ul{margin:0;padding-left:1.1em;font-size:.92rem;color:var(--ink-soft)}
+.svc article.sec{background:var(--surface)}
+@media (max-width:1000px){.svc{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.svc{grid-template-columns:1fr}}
+
+/* steps */
+.steps-band{background:var(--band);color:var(--band-fg)}
+.steps-band .eyebrow{color:var(--ochre)}
+.steps-band .lede{color:var(--band-soft);margin-top:16px}
+.steps{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s}
+.steps li{border-top:2px solid var(--ochre);padding-top:18px;display:grid;gap:10px;counter-increment:s}
+.steps li::before{content:"Step " counter(s);font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
+.steps p{color:var(--band-soft)}
+.steps .when{font-family:var(--f-mono);font-size:.78rem;color:var(--band-fg)}
+.steps-cta{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.steps-cta span{color:var(--band-soft);font-size:.92rem}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px;row-gap:12px;margin-top:40px}
+.person{display:grid;grid-row:span 4;grid-template-rows:subgrid;gap:12px;align-content:start}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center 20%;border-radius:inherit;display:block}
+.portrait:has(img){background:var(--surface)}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:var(--r);background:
+  repeating-linear-gradient(135deg,var(--line) 0 1px,transparent 1px 10px),var(--surface);
+  border:1px solid var(--line);display:grid;place-items:center;position:relative}
+.portrait span{font-family:var(--f-display);font-size:2.6rem;color:var(--ink-soft)}
+.portrait small{position:absolute;bottom:8px;left:8px;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--paper);padding:2px 6px;border-radius:3px}
+.person .role{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ochre-ink)}
+.person p{font-size:.93rem;color:var(--ink-soft)}
+.person .yrs{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink)}
+@media (max-width:960px){.team{grid-template-columns:1fr 1fr;row-gap:12px}.person{margin-bottom:24px}}
+@media (max-width:520px){.team{grid-template-columns:1fr}}
+
+/* corporate */
+.corp{background:var(--surface);border-block:1px solid var(--line)}
+.corp-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center}
+.corp-grid>*{min-width:0}
+.corp .lede{margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;font-size:.92rem}
+@media (max-width:860px){.corp-grid{grid-template-columns:1fr}}
+
+/* insights */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.post{display:grid;gap:10px;align-content:start;padding-top:16px;border-top:1px solid var(--ink)}
+.post .meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.post p{color:var(--ink-soft);font-size:.95rem}
+.post a{font-weight:600;text-decoration-color:var(--ochre);text-underline-offset:4px}
+.magnet{margin-top:44px;display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;background:var(--ochre-wash);border-radius:10px;padding:clamp(22px,4vw,36px)}
+.magnet>*{min-width:0}
+.magnet h3{font-size:1.5rem;color:var(--ink)}
+.magnet p{color:var(--ink-soft);margin-top:8px}
+.magnet form{display:flex;gap:10px;flex-wrap:wrap}
+.magnet input{flex:1 1 200px;min-width:0}
+@media (max-width:860px){.posts{grid-template-columns:1fr}.magnet{grid-template-columns:1fr}}
+
+/* careers */
+.careers{border-block:1px solid var(--line)}
+.careers .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-block:30px}
+.careers p{color:var(--ink-soft)}
+.careers b{color:var(--ink)}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,64px)}
+.faq-grid>*{min-width:0}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--ochre-ink)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--ink-soft);max-width:62ch}
+@media (max-width:860px){.faq-grid{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:var(--band);color:var(--band-fg)}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.contact-grid>*{min-width:0}
+.contact .eyebrow{color:var(--ochre)}
+.contact .lede{color:var(--band-soft);margin-top:16px}
+.addr{margin-top:32px;display:grid;gap:18px;font-size:.95rem}
+.addr div{display:grid;gap:2px}
+.addr .k{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--band-soft)}
+.addr .sel{user-select:all}
+form.check{background:var(--surface);color:var(--ink);border-radius:10px;padding:clamp(20px,3vw,32px);display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:.9rem}
+input,select,textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:.7em .8em;width:100%}
+textarea{min-height:96px;resize:vertical}
+.consent{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:.85rem;color:var(--ink-soft);align-items:start}
+.consent input{width:auto;margin-top:4px;accent-color:var(--ochre)}
+.form-ok{background:var(--ochre-wash);color:var(--ink);border-radius:var(--r);padding:16px}
+.form-ok b{color:var(--ok)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+footer.site{background:var(--band);color:var(--band-soft);border-top:1px solid #ffffff1a;font-size:.85rem}
+footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:24px}
+footer.site a{color:var(--band-fg)}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.quote{border:1.5px dashed var(--line);border-radius:10px;padding:24px;display:grid;gap:14px;align-content:start;background:var(--surface)}
+.quote p{font-family:var(--f-display);font-size:1.15rem;color:var(--ink-soft)}
+.quote span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre-ink)}
+@media (max-width:860px){.quotes{grid-template-columns:1fr}}
+
+/* demo notes drawer */
+.notes{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:70;width:min(380px,calc(100vw - 32px));max-height:70vh;overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 18px 40px #0003;padding:20px}
+.notes h3{font-size:1.15rem}
+.notes ol{margin:12px 0 0;padding-left:1.2em;display:grid;gap:8px;font-size:.88rem;color:var(--ink-soft)}
+.notes b{color:var(--ink)}
+.notes .x{float:right;background:none;border:0;font:inherit;font-weight:600;color:var(--ochre-ink);cursor:pointer}
+</style>
+
+<script>
+/* Always open on the banner. Only jump to a section when the visitor clicked a link to it from the Insights page. */
+(function(){
+  try{history.scrollRestoration='manual'}catch(e){}
+  var h=location.hash,jump=null;
+  try{jump=sessionStorage.getItem('ics-jump');sessionStorage.removeItem('ics-jump')}catch(e){}
+  if(h&&h===jump)return;
+  if(h){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+  function top(){window.scrollTo(0,0)}
+  top();addEventListener('DOMContentLoaded',top);addEventListener('load',function(){top();setTimeout(top,60)});
+})();
+</script>
+<div class="ribbon"><div class="wrap">
+  <span>Concept draft v4 by 247 Digital, updated with your 27 October feedback. Nothing here is live yet.</span>
+  <button type="button" id="notes-open">What's placeholder?</button>
+</div></div>
+
+<header class="site"><div class="wrap">
+  <a class="brand" href="#top"><img src="assets/img/ics-logo.png" alt="ICS logo" width="113" height="40"><span><b>Intrinsic Consulting Solutions</b><small>Outsourced HR · Est. 2017</small></span></a>
+  <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav class="main" id="nav" aria-label="Main"><ul>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Our people</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="#careers">Job seekers</a></li>
+    <li><a class="btn btn-primary" href="#contact">Book an HR Health Check</a></li>
+  </ul></nav>
+</div></header>
+
+<main id="top">
+
+<section class="hero" aria-label="Introduction">
+  <div class="wrap">
+    <div class="hero-inner">
+      <p class="kicker">What's missing from your team? An HR person.</p>
+      <h1 data-split>Outsourced and fractional HR for South African small to medium-sized businesses.</h1>
+      <p class="lede">A senior HR professional on your team for a few hours a week or a couple of days a month, on a fixed monthly fee.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#contact">Book an HR Health Check</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="proof"><div class="wrap">
+  <div><strong>Since 2017</strong><span>Cape Town head office, Johannesburg presence</span></div>
+  <div><strong>4 HR executives</strong><span>Each with 20+ years in HR, IR or labour law</span></div>
+  <div><strong>CCMA-tested</strong><span>Disciplinaries, grievances and representation</span></div>
+  <div><strong>Global depth</strong><span>Experience with brands like Coca-Cola, DHL and Toyota</span></div>
+</div></div>
+<div class="marquee" aria-label="What we handle">
+  <div class="marquee-track">
+    <ul><li>HR strategy</li><li>Contracts &amp; policies</li><li>Disciplinary hearings</li><li>CCMA preparation</li><li>Performance reviews</li><li>Organisational design</li><li>Workforce planning</li><li>Training &amp; facilitation</li><li>POPIA in the workplace</li><li>Executive search</li></ul>
+    <ul aria-hidden="true"><li>HR strategy</li><li>Contracts &amp; policies</li><li>Disciplinary hearings</li><li>CCMA preparation</li><li>Performance reviews</li><li>Organisational design</li><li>Workforce planning</li><li>Training &amp; facilitation</li><li>POPIA in the workplace</li><li>Executive search</li></ul>
+  </div>
+</div>
+
+<section class="band" id="why">
+  <div class="wrap pitch-grid">
+    <div>
+      <p class="eyebrow">Why it matters</p>
+      <h2 style="margin-top:12px" data-scrub>Your people are your biggest cost and your biggest risk.</h2>
+      <p class="lede">Most owners of small and medium businesses handle HR themselves, between everything else. It works until a dismissal goes wrong, a key person resigns, or a team stops pulling together. Having an HR person in your corner changes that.</p>
+    </div>
+    <div>
+      <ul class="why">
+        <li><b>Better staff</b><span>Hiring against a clear job description and the competencies the role needs, not gut feel.</span></li>
+        <li><b>More productive staff</b><span>Performance reviews and incentives tied to outcomes, so people know what good looks like.</span></li>
+        <li><b>A team that works together</b><span>Structure, clear roles and conflict dealt with early, before it costs you a resignation.</span></li>
+        <li><b>An extra set of eyes</b><span>Every contract, warning and policy checked against the BCEA, LRA and EEA before it goes out.</span></li>
+        <li><b>An extra set of ears</b><span>Someone staff can raise problems with, so you hear about them while they're still small.</span></li>
+      </ul>
+      <p class="ai-line">AI can draft a policy. It can't sit across the table from an upset employee. That's HR, and that's what we do.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band week-band" id="week">
+  <div class="wrap week-grid">
+    <div>
+      <p class="eyebrow">What it looks like</p>
+      <h2 style="margin-top:12px">A week with your HR person.</h2>
+      <p class="lede">Not a call centre and not a software login. A person who knows your people, your contracts and your risks, and deals with them as they come up.</p>
+    </div>
+    <aside class="weekcard" aria-label="Example of a week with your HR person">
+      <header><h3>A typical week</h3><span>Example client · 18 staff</span></header>
+      <ul class="log">
+        <li><time>Mon</time><div><b>Probation review prepared</b><span>New sales rep, month 3. Form and talking points sent to the MD.</span></div></li>
+        <li><time>Tue</time><div><b>Late-coming pattern flagged</b><span>Informal chat first, documented properly, so a warning holds up if it's needed.</span></div></li>
+        <li><time>Wed</time><div><b>On site, full day</b><span>Two one-on-ones, job description for the new admin role, leave queries.</span></div></li>
+        <li><time>Thu</time><div><b>Contract updated</b><span>Remote-work clause added after the owner asked on WhatsApp.</span></div></li>
+        <li><time>Fri</time><div><b>Recruitment shortlist</b><span>Three candidates for the admin role, interviewed and assessed.</span></div></li>
+      </ul>
+      <footer>Illustrative. Your week depends on what your business needs.</footer>
+    </aside>
+  </div>
+</section>
+
+<section class="band sizer" id="size">
+  <div class="wrap sizer-grid">
+    <div>
+      <p class="eyebrow">Hire or retain?</p>
+      <h2 style="margin-top:12px">Senior HR capability, without the headcount.</h2>
+      <p class="lede">Most small and medium-sized businesses don't need a full-time HR manager, or a bigger HR department. They need the experience of one, for the hours the business actually uses.</p>
+      <div class="table-scroll">
+      <table class="compare">
+        <thead><tr><th></th><th>Full-time HR hire</th><th>ICS on retainer</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly cost</td><td>R25,000 to R45,000+ salary, plus benefits</td><td class="us">A fixed monthly fee, scoped to your days</td></tr>
+          <tr><td>Experience</td><td>Whoever you can afford to hire</td><td class="us">20 to 30 years per HR executive</td></tr>
+          <tr><td>When they're away</td><td>HR stops</td><td class="us">A colleague who knows your file steps in</td></tr>
+          <tr><td>Specialist cover</td><td>Bought in separately</td><td class="us">Labour law, IR and recruitment in the team</td></tr>
+          <tr><td>Commitment</td><td>Permanent employment</td><td class="us">Month to month, scale up or down</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="tool" aria-live="polite">
+      <label for="headcount">How many people do you employ?</label>
+      <output id="hc-out" for="headcount">18</output>
+      <input type="range" id="headcount" min="0" max="1000" step="1" value="260" aria-valuetext="18 people">
+      <div class="scale" aria-hidden="true"><span style="left:0">5</span><span style="left:40%">25</span><span style="left:60%">50</span><span style="left:80%">100</span><span style="left:100%">250+</span></div>
+      <div class="result">
+        <span class="tag" id="r-tag">Suggested starting point</span>
+        <h3 id="r-title">One to two days a week</h3>
+        <p id="r-body">Enough time to run performance reviews, keep contracts current and handle issues as they come up.</p>
+        <ul id="r-list"></ul>
+      </div>
+      <p class="note">A guide only. The HR health check sets the real scope. One of our longest-standing clients grew from 12 to 25 people with us two days a week.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="services">
+  <div class="wrap">
+    <div class="svc-head">
+      <div><p class="eyebrow">What your HR person handles</p><h2 style="margin-top:12px">One person on your team. A full HR function behind them.</h2></div>
+      <p class="lede">Outsourced or fractional, you deal with one HR executive who knows your business. When something needs a specialist, they bring in a colleague from the ICS team.</p>
+    </div>
+    <div class="svc">
+      <article><span class="k">Strategy</span><h3>Human resource strategy</h3><p>We develop a human resource strategy that underpins your organisational strategic goals and objectives, so your people plan and your business plan pull in the same direction.</p></article>
+      <article><span class="k">Compliance</span><h3>Contracts and policies</h3><p>Employment contracts, a disciplinary code and the policies you're legally expected to have, written for how your business actually runs.</p></article>
+      <article><span class="k">Employee relations</span><h3>Discipline and the CCMA</h3><p>Warnings, hearings and grievances handled by the book, so a dismissal stands up if it's challenged. Representation when it gets that far.</p></article>
+      <article><span class="k">Structure</span><h3>Structure, culture and organisational development</h3><p>Org structures, job descriptions and development work that turn your strategy into clear roles and build the culture you want as you grow.</p></article>
+      <article><span class="k">Performance</span><h3>Reviews and incentives</h3><p>A performance review framework and incentives linked to outcomes, so pay rewards the results that matter to you.</p></article>
+      <article><span class="k">Planning</span><h3>Workforce planning</h3><p>Which roles you'll need, when, and whether to hire, develop or contract, decided before growth forces a rushed hire.</p></article>
+      <article><span class="k">Development</span><h3>Training and facilitation</h3><p>Customised training for supervisors and teams, and facilitated sessions to carry people through change: restructures, new managers, new systems.</p></article>
+      <article class="sec"><span class="k">Supporting service</span><h3>Recruitment</h3><p>Executive search, and permanent and contract placements, from the same team that wrote the job description.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="band steps-band" id="how">
+  <div class="wrap">
+    <p class="eyebrow">How it starts</p>
+    <h2 style="margin-top:12px">Start with a health check. Decide from there.</h2>
+    <p class="lede">No long contract up front. We look at where your business stands first, then agree what level of support makes sense.</p>
+    <ol class="steps">
+      <li><h3>HR health check</h3><p>A 5-minute online questionnaire, then a structured diagnostic of your contracts, policies, records and people practices. You get a written report showing what's compliant, what's exposed and what to fix first.</p><span class="when">About 2 days</span></li>
+      <li><h3>Your HR plan</h3><p>We walk you through the findings and agree priorities. Some clients fix the gaps as a once-off project. Most choose ongoing support.</p><span class="when">One meeting</span></li>
+      <li><h3>Your HR person</h3><p>A named ICS HR executive works with your business on a fixed number of hours or days each month, on site and on call.</p><span class="when">Month to month</span></li>
+    </ol>
+    <div class="steps-cta"><a class="btn btn-primary" href="#contact">Book an HR Health Check</a><span>The questionnaire takes about 5 minutes. We'll call you back within one business day.</span></div>
+  </div>
+</section>
+
+<section class="band" id="clients">
+  <div class="wrap">
+    <p class="eyebrow">What clients say</p>
+    <h2 style="margin-top:12px">From the businesses we work with.</h2>
+    <div class="quotes">
+      <figure class="quote" style="margin:0"><p>Client testimonial to come.</p><span>Name, role · Company, number of staff</span></figure>
+      <figure class="quote" style="margin:0"><p>Client testimonial to come.</p><span>Name, role · Company, number of staff</span></figure>
+      <figure class="quote" style="margin:0"><p>Client testimonial to come.</p><span>Name, role · Company, number of staff</span></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="team">
+  <div class="wrap">
+    <p class="eyebrow">Our people</p>
+    <h2 style="margin-top:12px">The people you'll actually work with.</h2>
+    <p class="lede" style="margin-top:14px">Every ICS HR executive has run HR inside real businesses, locally, across Africa and overseas.</p>
+    <div class="team">
+      <div class="person"><div class="portrait"><img src="assets/img/team/barbara-henshilwood.jpg" alt="Barbara Henshilwood" width="480" height="600"></div><span class="role">Recruitment and Labour Law</span><h3>Barbara Henshilwood</h3><p><span class="yrs">25 years</span> in HR, with qualifications in HR management, industrial relations and labour law. Barbara matches what a business needs to the right people and the right solution.</p></div>
+      <div class="person"><div class="portrait"><img src="assets/img/team/mark-meredith.jpg" alt="Mark Meredith" width="480" height="600"></div><span class="role">HR strategy</span><h3>Mark Meredith</h3><p>Operations and HR leadership in food and pharmaceuticals, then <span class="yrs">20+ years</span> in recruitment and managed services globally and in South Africa, including Australasia, Canada and the UK. Strategic and hands-on HR consulting.</p></div>
+      <div class="person"><div class="portrait"><img src="assets/img/team/marianne-steyn.jpg" alt="Marianne Steyn" width="480" height="600"></div><span class="role">Labour law &amp; governance</span><h3>Marianne Steyn</h3><p><span class="yrs">30+ years</span> across strategic and generalist HR, specialising in labour law, governance and complex employee relations. Deep experience in financial services, FinTech and start-ups.</p></div>
+      <div class="person"><div class="portrait"><img src="assets/img/team/caron-webb.jpg" alt="Caron Webb" width="480" height="600"></div><span class="role">Employee &amp; labour relations</span><h3>Caron Webb</h3><p><span class="yrs">22 years</span> as an HR generalist with a strong record of resolving conflict and winning cases at the CCMA, including in unionised environments.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band corp" id="corporate">
+  <div class="wrap corp-grid">
+    <div>
+      <p class="eyebrow">Already have an HR team?</p>
+      <h2 style="margin-top:12px">We take the project work off your desk.</h2>
+      <p class="lede">Corporate HR managers bring us in for the work that never gets done between day-to-day queries. Fixed scope, fixed fee, delivered to your standards.</p>
+    </div>
+    <div class="chips" aria-label="Typical corporate projects">
+      <span>HR strategy</span><span>Workforce planning</span><span>Job description libraries</span><span>Organisational design</span><span>Performance frameworks</span><span>Competency frameworks</span><span>Policy reviews</span><span>Change management</span><span>Incentive design</span><span>Recruitment and executive search</span>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="insights">
+  <div class="wrap">
+    <p class="eyebrow">Insights</p>
+    <h2 style="margin-top:12px">Plain-English HR for business owners.</h2>
+    <div class="posts">
+      <article class="post"><span class="meta">Compliance · 5 min</span><h3>Year-end closedown: leave, public holidays and pay over December</h3><p>Shutdown leave, the Day of Goodwill on a Saturday, and who gets paid what if they work on the 16th.</p><a href="insights.html#year-end">Read the article</a></article>
+      <article class="post"><span class="meta">AI &amp; the workplace · 6 min</span><h3>AI at work: what POPIA means for your business</h3><p>Staff pasting client details into chatbots, smart glasses in meetings, AI screening CVs. The law hasn't changed. The risks have.</p><a href="insights.html#ai-popia">Read the article</a></article>
+      <article class="post"><span class="meta">Employee relations · 6 min</span><h3>Your first disciplinary hearing: what the CCMA will look for</h3><p>A fair reason and a fair process. The steps owners skip most often, and why skipping them costs more than the hearing.</p><a href="insights.html#ccma-hearing">Read the article</a></article>
+    </div>
+    <p style="margin-top:24px"><a class="btn btn-ghost" href="insights.html">See all insights</a></p>
+    <div class="magnet">
+      <div><h3>The small business HR compliance checklist</h3><p>Twenty questions to check your contracts, policies and records against the BCEA, LRA, EEA and POPIA. Free download.</p></div>
+      <form id="magnet-form" novalidate>
+        <label for="mag-email" class="sr" style="position:absolute;left:-9999px">Work email</label>
+        <input id="mag-email" type="email" placeholder="Your work email" required>
+        <button class="btn btn-primary" type="submit">Send me the checklist</button>
+        <p id="mag-msg" hidden style="flex-basis:100%;font-size:.9rem;color:var(--ink-soft)"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="careers" id="careers"><div class="wrap">
+  <p><b>Looking for your next role?</b> We still recruit for skilled and professional positions across South Africa.</p>
+  <a class="btn btn-ghost" href="#careers">Search current vacancies</a>
+</div></section>
+
+<section class="band" id="faq">
+  <div class="wrap faq-grid">
+    <div><p class="eyebrow">Questions</p><h2 style="margin-top:12px">What owners usually ask first.</h2></div>
+    <div>
+      <details><summary>How is this different from an HR software subscription?</summary><p>Software stores records and generates templates. It can't run a disciplinary hearing, coach a new manager or tell you whether a dismissal will hold. You get a person who does those things, and who uses whatever systems you already have.</p></details>
+      <details><summary>Do you work on site or remotely?</summary><p>Both. Most clients have a regular on-site day and reach their HR executive by phone, email or WhatsApp in between.</p></details>
+      <details><summary>What happens if we have a CCMA case?</summary><p>Your HR executive prepares the case with you, from documentation to witness preparation, and our employee relations specialists can represent you where the rules allow.</p></details>
+      <details><summary>Are we locked into a long contract?</summary><p>No. Retainers run month to month. Start with the health check, and continue only if the support is earning its keep.</p></details>
+      <details><summary>Can you still help us recruit?</summary><p>Yes. Recruitment is part of the same service, so the person who wrote the job description is the one finding the candidates.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">Book an HR Health Check</p>
+      <h2 style="margin-top:12px">Find out where your business stands.</h2>
+      <p class="lede">Tell us a little about your business. We'll call you back within one business day to set up your health check.</p>
+      <div class="addr">
+        <div><span class="k">Head office</span><span>18 Ebony Road, Tokai, Cape Town, 7945</span></div>
+        <div><span class="k">Email</span><span class="sel">admin@icsol.co.za</span></div>
+        <div><span class="k">Cape Town</span><span class="sel">082 921 9965</span></div>
+        <div><span class="k">Johannesburg</span><span class="sel">079 103 2490</span></div>
+      </div>
+    </div>
+    <form class="check" id="check-form" novalidate>
+      <div class="row2">
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" required autocomplete="name"></div>
+        <div class="field"><label for="f-company">Business name</label><input id="f-company" required autocomplete="organization"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="f-size">Number of employees</label>
+          <select id="f-size"><option>Under 10</option><option selected>10 to 25</option><option>26 to 50</option><option>51 to 100</option><option>101 to 250</option><option>More than 250</option></select></div>
+        <div class="field"><label for="f-need">Main reason for getting in touch</label>
+          <select id="f-need"><option>Ongoing HR support</option><option>A disciplinary or CCMA matter</option><option>Contracts and policies</option><option>Structure or performance project</option><option>Recruitment</option></select></div>
+      </div>
+      <div class="field"><label for="f-msg">Anything we should know? (optional)</label><textarea id="f-msg"></textarea></div>
+      <label class="consent" for="f-consent"><input type="checkbox" id="f-consent" required><span>I agree that ICS may use these details to contact me about my enquiry, in line with the ICS POPIA privacy notice. You can ask us to delete them at any time.</span></label>
+      <button class="btn btn-primary" type="submit">Book an HR Health Check</button>
+      <p id="form-err" hidden style="color:#b3261e;font-size:.9rem"></p>
+      <div class="form-ok" id="form-ok" hidden><b>Thanks, request received.</b> In the live site this lands in the CRM, notifies Barbara and Mark, and starts a follow-up. In this demo nothing is sent.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Intrinsic Consulting Solutions (ICS). Outsourced HR, IR and recruitment.</span>
+  <span><a href="insights.html">Insights</a> · <a href="#contact">POPIA privacy notice</a> · <a href="https://www.linkedin.com/company/intrinsic-consulting-sa" target="_blank" rel="noopener">LinkedIn</a></span>
+</div></footer>
+
+<aside class="notes" id="notes" hidden aria-label="Demo notes">
+  <button class="x" type="button" id="notes-close">Close</button>
+  <h3>Before this goes live</h3>
+  <ol>
+    <li><b>Hero photo:</b> AI-generated concept image. Swap for licensed stock or a real shoot before launch.</li><li><b>Insights articles:</b> drafts for ICS to fact-check and approve before publishing.</li>
+    <li><b>Testimonials:</b> three slots waiting on quotes Mark is collecting.</li>
+    <li><b>Andy Mackenzie:</b> add a team card if he's client-facing.</li>
+    <li><b>Health check:</b> 5-minute questionnaire, 2-day turnaround. Confirm whether it's free.</li>
+    <li><b>Hire comparison:</b> R25k to R45k+ is the market benchmark; confirm ICS is happy to show it.</li>
+    <li><b>Sizing guide:</b> the days per week for 51 to 100 and 101 to 250 people are 247 placeholders for ICS to confirm.</li>
+    <li><b>Example week:</b> illustrative, not a real client.</li>
+    <li><b>Job seekers:</b> the Placement Partners vacancy feed moves across unchanged.</li>
+    <li><b>Forms:</b> the live version posts to the 247 CRM, logs POPIA consent and books into Barbara's calendar.</li>
+  </ol>
+</aside>
+
+<script>
+(function(){
+  var btn=document.getElementById('menu-btn'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}});
+
+  var notes=document.getElementById('notes');
+  document.getElementById('notes-open').addEventListener('click',function(){notes.hidden=false});
+  document.getElementById('notes-close').addEventListener('click',function(){notes.hidden=true});
+
+  var tiers=[
+    {max:9,title:'A few hours a week',body:'Mostly on call: a sounding board for the owner, with a short monthly check-in.',list:['Contracts and policies set up once, then kept current','Advice on warnings and difficult conversations','Help with your next hire']},
+    {max:30,title:'One to two days a week',body:'Enough time to run performance reviews, keep contracts current and handle issues as they come up.',list:['A regular on-site day','Performance reviews and probation management','Discipline and grievances handled with you','Job descriptions as roles are added']},
+    {max:50,title:'Two days a week',body:'A standing HR function: structure, performance and employee relations run properly as the team grows.',list:['Org structure and role design','Performance and incentive framework','Manager coaching and training','Recruitment for growth roles']},
+    {max:100,title:'Three days a week',body:'Your HR function, run for you: a senior HR executive on site most of the week, with the wider ICS team behind them.',list:['Regular on-site days, plus same-day cover','HR policies, procedures and compliance audits','Employment equity and skills development reporting','Workforce planning and recruitment for growth roles']},
+    {max:249,title:'A full outsourced HR function',body:'A dedicated HR lead on site most days, backed by labour law, IR and recruitment specialists. The capability of an HR department, without building one.',list:['A dedicated HR lead, four to five days a week','Industrial relations and union engagement','Training, facilitation and leadership development','Monthly HR reporting to management']},
+    {max:9999,title:'Talk to us',body:'At 250 people or more you likely have an HR team already. We add senior depth where it\'s needed.',list:['Project support for your HR team','Interim cover during a vacancy','Recruit your next HR manager']}
+  ];
+  var r=document.getElementById('headcount'),out=document.getElementById('hc-out');
+  /* Non-linear scale: most clients sit under 50, so 5 to 50 gets 60% of the track. */
+  var stops=[[0,5],[400,25],[600,50],[800,100],[1000,250]];
+  function toPeople(v){
+    for(var i=1;i<stops.length;i++){var a=stops[i-1],b=stops[i];
+      if(v<=b[0]){var n=a[1]+(v-a[0])*(b[1]-a[1])/(b[0]-a[0]);return n>100?Math.round(n/5)*5:Math.round(n)}}
+    return 250;
+  }
+  function upd(){
+    var n=toPeople(+r.value),lbl=n+(n>=250?'+':'');out.textContent=lbl;
+    r.setAttribute('aria-valuetext',lbl+' people');
+    var t=tiers.find(function(x){return n<=x.max});
+    document.getElementById('r-title').textContent=t.title;
+    document.getElementById('r-body').textContent=t.body;
+    document.getElementById('r-list').innerHTML=t.list.map(function(i){return '<li>'+i+'</li>'}).join('');
+  }
+  r.addEventListener('input',upd); upd();
+
+  document.getElementById('magnet-form').addEventListener('submit',function(e){
+    e.preventDefault();var em=document.getElementById('mag-email'),m=document.getElementById('mag-msg');
+    m.hidden=false;
+    m.textContent=em.checkValidity()?'Demo only: in the live site the checklist is emailed and the contact is added to the CRM.':'Enter a valid email address.';
+  });
+
+  document.getElementById('check-form').addEventListener('submit',function(e){
+    e.preventDefault();var f=e.target,err=document.getElementById('form-err');
+    var bad=['f-name','f-company','f-email'].filter(function(id){return !document.getElementById(id).checkValidity()});
+    if(bad.length){err.hidden=false;err.textContent='Please add your name, business name and a valid email.';return}
+    if(!document.getElementById('f-consent').checked){err.hidden=false;err.textContent='Please tick the consent box so we can contact you.';return}
+    err.hidden=true;document.getElementById('form-ok').hidden=false;
+  });
+})();
+</script>
+<script src="assets/js/effects.js" defer></script>
+<script src="assets/js/chat.js" defer></script>
+
+</body></html>
