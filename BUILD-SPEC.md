@@ -50,7 +50,7 @@ Each service page: H1 = service name, the card text as the intro, a `[NEW COPY]`
 
 ## 4. Design system
 
-Copy the tokens from the `:root` block in `design-reference/index.html` exactly, including both dark-mode blocks.
+All styles are in `design-reference/assets/css/site.css` (load first on every page), `insights.css` (Insights pages) and `effects.css` (motion). Port all three in full; don't rebuild them from screenshots. The tokens are the `:root` block at the top of `site.css`, including both dark-mode blocks.
 
 | Token | Light | Use |
 |---|---|---|
