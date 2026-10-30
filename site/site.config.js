@@ -46,4 +46,4 @@ window.ICS_TIERS = [
     body: "At 250 people or more you likely have an HR team already. We add senior depth where it's needed.",
     list: ["Project support for your HR team", "Interim cover during a vacancy", "Recruit your next HR manager"]
   }
-]);
+];

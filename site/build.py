@@ -18,6 +18,7 @@ REFERENCE_INSIGHTS_CSS = ROOT.parent / "design-reference" / "assets" / "css" / "
 REFERENCE_EFFECTS_CSS = ROOT.parent / "design-reference" / "assets" / "css" / "effects.css"
 REFERENCE_EFFECTS_JS = ROOT.parent / "design-reference" / "assets" / "js" / "effects.js"
 BASE_URL = "https://icsol.co.za"
+ASSET_VERSION = "20261030.5"
 
 CONTACT = {
     "streetAddress": "18 Ebony Road",
@@ -40,6 +41,86 @@ SERVICES = [
     ("training-and-facilitation", "Development", "Training and facilitation", "Customised training for supervisors and teams, and facilitated sessions to carry people through change: restructures, new managers, new systems.", "Marianne Steyn", None),
     ("recruitment", "Supporting service", "Recruitment", "Executive search, and permanent and contract placements, from the same team that wrote the job description.", "Barbara Henshilwood", None),
 ]
+
+SERVICE_COPY = {
+    "hr-strategy": (
+        [
+            "A review of your current people practices against your business plan",
+            "A people strategy for the next 12 months, with clear priorities",
+            "The roles, skills and structure you'll need to deliver it",
+            "Regular check-ins with you and your leadership team to keep it on track",
+        ],
+        "Owners and leadership teams planning growth, a restructure or a new direction, who want their people plan to keep pace with the business plan.",
+    ),
+    "contracts-and-policies": (
+        [
+            "Employment contracts for permanent, fixed-term and part-time staff",
+            "A disciplinary code and procedure that fits how you operate",
+            "Core policies, including leave, remote work, social media and POPIA in the workplace",
+            "An employee handbook that pulls it all together",
+            "Updates when the BCEA, LRA, EEA or POPIA change",
+        ],
+        "Businesses using old templates, with staff who have never signed a contract, or about to make their next hire.",
+    ),
+    "discipline-and-ccma": (
+        [
+            "Advice before you act, so the process is right from the first conversation",
+            "Investigations and notices of allegations",
+            "Independent chairing of disciplinary hearings",
+            "Grievance handling",
+            "CCMA preparation, from documents to witnesses, and representation where the rules allow",
+        ],
+        "Any owner or manager dealing with misconduct, poor performance, a grievance or a CCMA referral.",
+    ),
+    "structure-culture-od": (
+        [
+            "Organisational structure and reporting lines that match your strategy",
+            "Job descriptions and role profiles for every position",
+            "Support through restructuring and change",
+            "Facilitated sessions that build the culture you want as you grow",
+        ],
+        "Businesses that have outgrown an informal structure, are bringing teams together, or are going through change.",
+    ),
+    "performance-and-incentives": (
+        [
+            "A performance review framework, with templates your managers will use",
+            "Clear outcomes and measures for each role",
+            "Probation management for new hires",
+            "Incentive and bonus schemes linked to results",
+            "Coaching for managers on review conversations",
+        ],
+        "Owners who want staff to know what good looks like, and pay that rewards the results that matter.",
+    ),
+    "workforce-planning": (
+        [
+            "A review of your current team, roles and skills",
+            "The roles you'll need over the next 12 to 24 months",
+            "Hire, develop or contract decisions for each one",
+            "Succession planning for key people",
+            "Employment equity planning once you reach 50 employees",
+        ],
+        "Growing businesses, and those planning a new site, service line or expansion.",
+    ),
+    "training-and-facilitation": (
+        [
+            "Training for supervisors and new managers, from discipline to difficult conversations",
+            "Workshops on your contracts, policies and procedures",
+            "Facilitated strategy, team and change sessions",
+            "Content customised to your industry and your people",
+        ],
+        "Businesses promoting people into management for the first time, and teams going through change.",
+    ),
+    "recruitment": (
+        [
+            "Executive search for senior roles",
+            "Permanent and contract placements",
+            "A clear job description and competency profile before the search starts",
+            "Shortlisting, interviews and assessment",
+            "Reference and qualification checks",
+        ],
+        "Businesses hiring for skilled, professional and senior roles across South Africa. Because recruitment sits with the same team as your HR, the person who wrote the job description is the one finding the candidates.",
+    ),
+}
 
 ARTICLE_ROUTES = {
     "year-end": "/insights/year-end-closedown/",
@@ -171,7 +252,7 @@ def document(title: str, description: str, path: str, content: str, active: str 
     canonical = BASE_URL + path
     title_html = html.escape(title, quote=True)
     description_html = html.escape(description, quote=True)
-    insights_stylesheet = '<link rel="stylesheet" href="/css/insights.css">' if include_insights_css else ""
+    insights_stylesheet = f'<link rel="stylesheet" href="/css/insights.css?v={ASSET_VERSION}">' if include_insights_css else ""
     schema_list = [professional_schema()]
     if path != "/":
         schema_list.append(breadcrumb(path, title.split(" | ")[0]))
@@ -190,16 +271,16 @@ def document(title: str, description: str, path: str, content: str, active: str 
   <meta property="og:title" content="{title_html}"><meta property="og:description" content="{description_html}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{BASE_URL}/assets/img/hero-concept.jpg">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title_html}"><meta name="twitter:description" content="{description_html}">
   <link rel="icon" href="/assets/img/ics-logo.png" type="image/png">
-  <link rel="stylesheet" href="/assets/fonts/fonts.css"><link rel="stylesheet" href="/css/styles.css">{insights_stylesheet}<link rel="stylesheet" href="/css/effects.css">
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/styles.css?v={ASSET_VERSION}">{insights_stylesheet}<link rel="stylesheet" href="/css/effects.css?v={ASSET_VERSION}">
   <script type="application/ld+json">{schema}</script>
 </head>
 <body>
 {shared_header(active)}
 <main id="main">{content}</main>
 {shared_footer()}
-<button class="chat-launcher" type="button" hidden aria-label="Open chat">Chat</button>
-<div class="cookie-banner" role="dialog" aria-label="Privacy choices" aria-live="polite"><p>We use cookies for analytics and chat only if you accept. Read our <a href="/privacy/">POPIA privacy notice</a>.</p><div><button class="btn btn-ghost" type="button" data-consent="declined">Decline</button><button class="btn btn-primary" type="button" data-consent="accepted">Accept</button></div></div>
-<script src="/site.config.js"></script><script src="/js/effects.js" defer></script><script src="/js/app.js" defer></script>
+	<button class="chat-launcher" type="button" hidden aria-label="Open chat">Chat</button>
+	<div class="cookie-banner" role="dialog" aria-label="Privacy choices" aria-live="polite"><p>We use cookies for analytics and chat only if you accept. Read our <a href="/privacy/">POPIA privacy notice</a>.</p><div><button class="btn btn-ghost" type="button" data-consent="declined">Decline</button><button class="btn btn-primary" type="button" data-consent="accepted">Accept</button></div></div>
+	<script src="/site.config.js?v={ASSET_VERSION}"></script><script src="/js/effects.js?v={ASSET_VERSION}" defer></script><script src="/js/app.js?v={ASSET_VERSION}" defer></script>
 </body></html>'''
 
 
@@ -258,10 +339,8 @@ def health_check_page(reference: str) -> str:
     size = extract_section(reference, "size")
     contact = extract_section(reference, "contact")
     faq = extract_section(reference, "faq")
-    steps = steps.replace('href="#contact"', 'href="#booking-form"')
     size = rewrite_reference_assets(size)
     contact = lead_form_markup(rewrite_reference_assets(contact))
-    contact = contact.replace('id="contact"', 'id="booking-form"')
     return f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">Book an HR Health Check</p><h1>Start with a health check. Decide from there.</h1><p class="lede">No long contract up front. We look at where your business stands first, then agree what level of support makes sense.</p></div></section>{steps}{size}{contact}{faq}'''
 
 
@@ -272,16 +351,18 @@ def services_page() -> str:
 
 def service_page(service: tuple[str, str, str, str, str, str | None]) -> str:
     slug, category, title, intro, lead, related = service
+    included, audience = SERVICE_COPY[slug]
+    included_markup = "".join(f"<li>{item}</li>" for item in included)
     related_markup = f'<p><a class="btn btn-ghost" href="{related}">Read the related Insight</a></p>' if related else ""
     return f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">{category}</p><h1>{title}</h1><p class="lede">{intro}</p></div></section>
-<section class="band"><div class="wrap service-detail"><div><p class="eyebrow">What's included</p><div class="review-note">[NEW COPY: for 247 review]</div></div><div><p class="eyebrow">Who it's for</p><div class="review-note">[NEW COPY: for 247 review]</div></div><aside class="service-team"><p class="eyebrow">Your ICS lead</p><h2>{lead}</h2><p><a href="/about/">Meet our people</a></p>{related_markup}</aside></div></section>
+<section class="band"><div class="wrap service-detail"><div><p class="eyebrow">What's included</p><ul class="service-list">{included_markup}</ul></div><div><p class="eyebrow">Who it's for</p><p>{audience}</p></div><aside class="service-team"><p class="eyebrow">Your ICS lead</p><h2>{lead}</h2><p><a href="/about/">Meet our people</a></p>{related_markup}</aside></div></section>
 <section class="band steps-band closing-cta"><div class="wrap"><h2>Start with a health check. Decide from there.</h2><p class="steps-cta"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a><span>The questionnaire takes about 5 minutes. Results in about 2 days.</span></p></div></section>'''
 
 
 def about_page(reference: str) -> str:
     team = rewrite_reference_assets(extract_section(reference, "team"))
     person_schema = [{"@context": "https://schema.org", "@type": "Person", "name": name, "worksFor": {"@type": "Organization", "name": "Intrinsic Consulting Solutions"}} for name in ["Barbara Henshilwood", "Mark Meredith", "Marianne Steyn", "Caron Webb"]]
-    content = f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">About ICS</p><h1>Outsourced and fractional HR for South African small to medium-sized businesses.</h1><p class="lede">[NEW COPY: for 247 review] ICS has supported businesses since 2017.</p></div></section>
+    content = f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">About ICS</p><h1>Outsourced and fractional HR for South African small to medium-sized businesses.</h1><p class="lede">Intrinsic Consulting Solutions was founded in Cape Town in 2017. For many years we were best known for recruitment. Over time, the businesses we recruited for needed more than new people: contracts that hold up, disciplinary processes done properly, and structures that make sense as they grow.</p><p class="lede">Today ICS is an outsourced and fractional HR partner for small to medium-sized businesses across South Africa, with recruitment still part of what we do. Our head office is in Tokai, Cape Town, with a presence in Johannesburg.</p></div></section>
 <div class="proof"><div class="wrap"><div><strong>Since 2017</strong><span>Cape Town head office, Johannesburg presence</span></div><div><strong>4 HR executives</strong><span>Each with 20+ years in HR, IR or labour law</span></div><div><strong>CCMA-tested</strong><span>Disciplinaries, grievances and representation</span></div><div><strong>Global depth</strong><span>Experience with brands like Coca-Cola, DHL and Toyota</span></div></div></div>{team}<section class="band steps-band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
     return content, person_schema
 
@@ -314,7 +395,7 @@ def article_page(reference: str, article_id: str) -> tuple[str, dict]:
 
 
 def job_seekers_page() -> str:
-    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Job seekers</p><h1>Looking for your next role?</h1><p class="lede">We still recruit for skilled and professional positions across South Africa.</p></div></section><section class="careers"><div class="wrap"><p><b>Looking for your next role?</b> We still recruit for skilled and professional positions across South Africa.</p><a class="btn btn-ghost" data-vacancies-link href="/contact/">Search current vacancies</a></div></section><section class="band"><div class="wrap vacancies"><p class="review-note">[NEW COPY: for 247 review] The Placement Partners vacancies feed is being connected.</p></div></section><section class="band steps-band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
+    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Job seekers</p><h1>Looking for your next role?</h1><p class="lede">We still recruit for skilled and professional positions across South Africa.</p></div></section><section class="careers"><div class="wrap"><div class="vacancies"><p><b>Looking for your next role?</b> We still recruit for skilled and professional positions across South Africa.</p><p>Browse our current vacancies, or send us your CV and we'll be in touch when a role matches your experience.</p><div class="job-actions"><a class="btn btn-ghost" href="https://www.icsol.co.za/job-search/" target="_blank" rel="noopener">Search current vacancies</a><a class="btn btn-primary" href="https://www.icsol.co.za/submit-your-cv/" target="_blank" rel="noopener">Submit your CV</a></div><p class="job-smallprint">How we handle candidate information is set out in our <a href="https://www.icsol.co.za/popi/" target="_blank" rel="noopener">POPI policy</a>.</p></div></div></section><section class="band steps-band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
 
 
 def contact_page(reference: str) -> str:
@@ -326,7 +407,7 @@ def contact_page(reference: str) -> str:
 
 
 def privacy_page() -> str:
-    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Privacy</p><h1>POPIA privacy notice</h1><p class="lede">[NEW COPY: for 247 review] ICS to supply, or 247 to draft for ICS approval.</p></div></section><section class="band"><div class="wrap read"><div class="review-note">[NEW COPY: for 247 review]</div><p>This page must be completed and approved before the website collects personal information through any live form.</p></div></section>'''
+    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Privacy</p><h1>Privacy notice</h1><p class="lede">This notice explains how Intrinsic Consulting Solutions (ICS) handles the personal information you give us through this website, in line with the Protection of Personal Information Act (POPIA).</p></div></section><section class="band"><div class="wrap read"><h2>What we collect</h2><p>When you book an HR Health Check, contact us or request a checklist, we collect your name, business name, email address, phone number, the number of people you employ and anything you choose to tell us in your message.</p><h2>Why we collect it</h2><p>We use it to respond to your enquiry, arrange and deliver your HR Health Check, and send you the resources you ask for. We'll only send you other updates if you agree to receive them, and you can opt out at any time.</p><h2>Who sees it</h2><p>Your information is seen by the ICS team. We use trusted service providers to run this website and our email, and they may only use your information on our instructions. We don't sell your information.</p><h2>How long we keep it</h2><p>We keep your information for as long as we need it to deal with your enquiry or provide our services, or as the law requires.</p><h2>Your rights</h2><p>You can ask us what information we hold about you, ask us to correct or delete it, object to how we use it, or withdraw your consent. Email admin@icsol.co.za.</p><h2>Candidates and job seekers</h2><p>If you apply for a role or send us your CV, our <a href="https://www.icsol.co.za/popi/">POPI policy for candidates</a> applies.</p><h2>Complaints</h2><p>If you're unhappy with how we've handled your information, contact us first at admin@icsol.co.za. You can also complain to the Information Regulator: https://inforegulator.org.za</p><h2>Contact</h2><p>Intrinsic Consulting Solutions, 18 Ebony Road, Tokai, Cape Town, 7945. admin@icsol.co.za. 082 921 9965.</p><p>Last updated: October 2026</p></div></section>'''
 
 
 def faq_schema() -> dict:
@@ -356,6 +437,8 @@ def write_support_files() -> None:
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .page-hero{background:var(--band);color:var(--band-fg);padding-block:clamp(56px,9vw,110px)}.page-hero .eyebrow{color:var(--ochre)}.page-hero h1{margin-top:12px;max-width:25ch}.page-hero .lede{color:var(--band-soft);margin-top:18px}
+.service-list{margin:14px 0 0;padding-left:1.2em;display:grid;gap:10px}.service-list li::marker{color:var(--ochre-ink)}.job-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.job-smallprint{margin-top:14px;font-size:.9rem;color:var(--ink-soft)}
+.cookie-banner[hidden]{display:none!important}
 .footer-grid{display:grid!important;grid-template-columns:repeat(3,1fr) 1.2fr;align-items:start}.footer-grid>div{display:grid;gap:4px}.footer-grid strong{color:var(--band-fg)}.footer-grid .copyright{align-self:end}@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr!important}.footer-grid .copyright{grid-column:1/-1}}
 .service-card-link{display:grid;gap:10px;align-content:start;color:inherit;text-decoration:none;min-height:100%}.service-card-link .more{font-weight:600;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:4px}.service-detail{display:grid;grid-template-columns:1fr 1fr;gap:40px}.service-team{grid-column:1/-1;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px}.service-team h2{margin-top:8px}.review-note{display:inline-block;background:var(--ochre-wash);color:var(--ochre-ink);padding:8px 10px;border-radius:var(--r);font-family:var(--f-mono);font-size:.82rem;line-height:1.4}.closing-cta{text-align:center}.closing-cta .steps-cta{justify-content:center}.honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important}.lead-form [data-form-message][data-state="error"]{color:#b3261e}.lead-form [data-form-message][data-state="success"]{background:var(--ochre-wash);padding:12px;border-radius:var(--r);color:var(--ok)}
 .ins-hero{background:var(--band);color:var(--band-fg);padding-block:clamp(48px,7vw,88px)}.ins-hero .eyebrow{color:var(--ochre)}.ins-hero h1{margin-top:12px;max-width:20ch}.ins-hero .lede{color:var(--band-soft);margin-top:16px}.compact-hero{padding-block:32px}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}.chip{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}.chip.on{background:var(--band);border-color:var(--band);color:var(--band-fg)}.feature{display:grid;grid-template-columns:.8fr 1.2fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;background:var(--surface);margin-bottom:28px}.feature-art{background:var(--band);color:var(--band-fg);display:grid;place-content:center;gap:6px;text-align:center;padding:40px 20px;font-family:var(--f-mono);letter-spacing:.14em;font-size:.8rem}.feature-art b{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,4vw,3rem);letter-spacing:0;color:var(--ochre)}.feature-body{padding:clamp(22px,3vw,36px);display:grid;gap:12px;align-content:center}.feature-body h2{font-size:clamp(1.5rem,2.6vw,2rem)}.feature-body p,.card p{color:var(--ink-soft)}.meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre-ink)}.more{font-weight:600;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:4px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{display:grid;gap:10px;align-content:start;padding:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:inherit}.card.soon{background:transparent;border-style:dashed}.card.soon .meta{color:var(--ink-soft)}.read{max-width:760px}.back{display:inline-block;margin-bottom:24px;font-weight:600;text-decoration:none;color:var(--ochre-ink)}.read h1{font-size:clamp(2rem,4vw,2.9rem);margin-top:10px}.standfirst{font-size:1.2rem;color:var(--ink-soft);margin-top:18px;padding-bottom:24px;border-bottom:1px solid var(--line)}.read h2{font-size:1.45rem;margin-top:36px;margin-bottom:10px}.read p+p{margin-top:14px}.read ul,.read ol{padding-left:1.2em;display:grid;gap:8px;margin:12px 0}.dates{width:100%;border-collapse:collapse;margin:12px 0 16px;font-variant-numeric:tabular-nums}.dates th,.dates td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}.dates th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}.checklist{margin-top:36px;background:var(--ochre-wash);border-radius:10px;padding:24px}.checklist h3{font-size:1.25rem}.checklist ul{list-style:none;padding:0}.checklist li{padding-left:28px;position:relative}.checklist li::before{content:"";position:absolute;left:0;top:.35em;width:16px;height:16px;border:2px solid var(--ochre-ink);border-radius:3px}.post-cta{margin-top:36px;background:var(--band);color:var(--band-fg);border-radius:10px;padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}.post-cta>div{flex:1 1 300px;min-width:0}.post-cta p{color:var(--band-soft);margin-top:6px}.disclaimer{margin-top:24px;font-size:.85rem;color:var(--ink-soft)}.magnet-band{background:var(--surface);border-top:1px solid var(--line)}.magnet-band .magnet{margin-top:0}.map-band iframe{width:100%;min-height:420px;border:1px solid var(--line);border-radius:10px}.vacancies{max-width:760px}.cookie-banner{position:fixed;z-index:100;right:16px;bottom:16px;width:min(520px,calc(100% - 32px));display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);color:var(--ink);box-shadow:0 14px 40px rgba(29,23,77,.25);border:1px solid var(--line);border-radius:10px;padding:16px}.cookie-banner p{font-size:.9rem;max-width:36ch}.cookie-banner div{display:flex;gap:8px}.chat-launcher{position:fixed;right:20px;bottom:20px;z-index:80;border:0;border-radius:999px;background:var(--ochre);color:var(--on-accent);padding:12px 18px;font:600 1rem var(--f-body);box-shadow:0 8px 24px rgba(29,23,77,.25);cursor:pointer}.cookie-banner[hidden]~.chat-launcher{bottom:20px}@media(max-width:900px){.feature{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.service-detail{grid-template-columns:1fr}.service-team{grid-column:auto}}@media(max-width:560px){.cards{grid-template-columns:1fr}.cookie-banner{left:16px;right:16px;width:auto}.cookie-banner .btn{padding:.7em 1em}}
@@ -366,6 +449,7 @@ def write_support_files() -> None:
     shutil.copy2(REFERENCE_EFFECTS_CSS, OUT / "css" / "effects.css")
     shutil.copy2(REFERENCE_EFFECTS_JS, OUT / "js" / "effects.js")
     shutil.copy2(ROOT / "src" / "app.js", OUT / "js" / "app.js")
+    shutil.copy2(ROOT / "src" / "chat-demo.js", OUT / "js" / "chat-demo.js")
     shutil.copy2(ROOT / "site.config.js", OUT / "site.config.js")
     shutil.copytree(ASSET_SOURCE, OUT / "assets" / "img", dirs_exist_ok=True)
     shutil.copytree(ROOT / "assets" / "fonts", OUT / "assets" / "fonts", dirs_exist_ok=True)
@@ -434,7 +518,7 @@ def main() -> None:
     write_route("/job-seekers/", document("Job seekers | Outsourced HR | ICS", "Recruitment opportunities for skilled and professional positions across South Africa.", "/job-seekers/", job_seekers_page(), "jobs"))
     write_route("/contact/", document("Contact | Outsourced HR | ICS", "Contact ICS in Cape Town or Johannesburg to book an HR Health Check.", "/contact/", contact_page(reference_home), ""))
     write_route("/privacy/", document("Privacy | Outsourced HR | ICS", "ICS POPIA privacy notice.", "/privacy/", privacy_page(), ""))
-    not_found = document("Page not found | ICS", "The page you requested could not be found.", "/404", '<section class="page-hero"><div class="wrap"><h1>Page not found.</h1><p class="lede">[NEW COPY: for 247 review] The page you requested could not be found.</p><p class="steps-cta"><a class="btn btn-primary" href="/">Home</a><a class="btn btn-ghost" href="/hr-health-check/">Book an HR Health Check</a></p></div></section>')
+    not_found = document("Page not found | ICS", "The page you requested could not be found.", "/404", '<section class="page-hero"><div class="wrap"><h1>We couldn\'t find that page.</h1><p class="lede">It may have moved when we updated our website.</p><p class="steps-cta"><a class="btn btn-primary" href="/">Go to the home page</a><a class="btn btn-ghost" href="/hr-health-check/">Book an HR Health Check</a></p></div></section>')
     (OUT / "404.html").write_text(not_found, encoding="utf-8")
     print(f"Built {len(ROUTES)} routes in {OUT}")
 

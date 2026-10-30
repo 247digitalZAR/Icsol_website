@@ -5,6 +5,9 @@
   const config = window.ICS_CONFIG || {};
   const consentKey = "ics-cookie-consent";
   const consentWording = "I agree that ICS may use these details to contact me about my enquiry, in line with the ICS POPIA privacy notice. You can ask us to delete them at any time.";
+  const checklistConsentWording = "I request the small business HR compliance checklist and agree that ICS may use my email address to send it to me, in line with the ICS POPIA privacy notice.";
+  const formSubmitEndpoint = "https://formsubmit.co/ajax/admin@icsol.co.za";
+  const assetVersion = "20261030.5";
   const hasValue = (value) => typeof value === "string" && value.trim().length > 0;
 
   function event(name, detail = {}) {
@@ -37,6 +40,15 @@
       liveScript.dataset.icsChatbot = "true";
       document.body.appendChild(liveScript);
     }
+  }
+
+  function loadDemoChat() {
+    if (hasValue(config.CHATBOT_EMBED) || document.querySelector("script[data-ics-demo-chat]")) return;
+    const script = document.createElement("script");
+    script.src = `/js/chat-demo.js?v=${assetVersion}`;
+    script.defer = true;
+    script.dataset.icsDemoChat = "true";
+    document.body.appendChild(script);
   }
 
   function applyConsent() {
@@ -124,7 +136,7 @@
   }
 
   async function submitLeadForm(form) {
-    const endpoint = form.dataset.endpoint === "checklist" ? config.CRM_CHECKLIST_ENDPOINT : config.CRM_FORM_ENDPOINT;
+    const isChecklist = form.dataset.formName === "checklist";
     const honeypot = form.querySelector("[name=website]");
     if (honeypot?.value) return;
     if (!form.reportValidity()) return;
@@ -133,29 +145,30 @@
       setFormMessage(form, "Please tick the consent box so we can contact you.", "error");
       return;
     }
-    if (!hasValue(endpoint)) {
-      setFormMessage(form, "Online submissions are being connected. Please call us on 082 921 9965 or email admin@icsol.co.za.", "error");
-      return;
-    }
     const data = Object.fromEntries(new FormData(form).entries());
+    delete data.website;
     const payload = {
       ...data,
+      _subject: isChecklist ? "New checklist request" : "New HR Health Check request",
+      _template: "table",
+      _captcha: "false",
       form_name: form.dataset.formName || "enquiry",
       page_url: location.href,
-      utm_parameters: utmParameters(),
-      timestamp: new Date().toISOString(),
-      consent_wording: consent ? consentWording : undefined
+      submitted_at: new Date().toISOString(),
+      consent_wording: isChecklist ? checklistConsentWording : consentWording,
+      ...utmParameters()
     };
     const submit = form.querySelector("button[type=submit]");
     submit.disabled = true;
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(formSubmitEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        headers: { "Accept": "application/json" },
+        body: new URLSearchParams(Object.entries(payload).filter(([, value]) => value !== undefined))
       });
-      if (!response.ok) throw new Error("CRM request failed");
-      setFormMessage(form, form.dataset.endpoint === "checklist" ? "Thanks, you're on the list. We'll send the checklist shortly." : "Thanks, request received. We'll call you back within one business day.", "success");
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success === "false") throw new Error("FormSubmit request failed");
+      setFormMessage(form, "Thanks, request received. We'll call you back within one business day.", "success");
       form.reset();
       event("form_submit", { form_name: form.dataset.formName || "enquiry", page: location.pathname });
     } catch (error) {
@@ -233,6 +246,7 @@
     initMenu();
     initSizingTool();
     initForms();
+    loadDemoChat();
     initInsightFilters();
     initVacanciesLink();
     initAnalyticsEvents();
