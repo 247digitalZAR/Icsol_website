@@ -1,0 +1,73 @@
+/* ICS motion layer. Every effect is decorative: content is complete without it,
+   and prefers-reduced-motion turns it all off. */
+
+/* Header: shadow once scrolled, lime reading-progress line */
+header.site{transition:box-shadow .3s ease}
+header.site.scrolled{box-shadow:0 6px 24px rgba(29,23,77,.10)}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--ochre);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+
+/* Buttons: small lift, arrow nudge */
+.btn{transition:transform .25s ease,box-shadow .25s ease,background-color .25s ease,filter .25s ease}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(139,197,63,.7)}
+.btn-ghost:hover{transform:translateY(-2px)}
+
+/* Hero load sequence: photo wipes in from the right, then drifts slowly */
+@keyframes heroWipe{from{clip-path:inset(0 0 0 100%);transform:scale(1.1)}to{clip-path:inset(0 0 0 0);transform:scale(1)}}
+@keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.05) translateX(-1%)}}
+.hero::before{transform-origin:70% 50%;animation:heroWipe 1.6s cubic-bezier(.65,0,.25,1) both,heroDrift 22s ease-in-out 1.6s infinite alternate}
+
+/* Split headline: words rise into place */
+@keyframes wordRise{from{opacity:0;transform:translateY(.55em);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.split-w{display:inline-block;animation:wordRise .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.25s + var(--i) * 60ms)}
+.hero .kicker,.hero .lede,.hero .ctas,.ins-hero .eyebrow,.ins-hero .lede{animation:wordRise 1s cubic-bezier(.2,.7,.2,1) both}
+.hero .kicker,.ins-hero .eyebrow{animation-delay:.1s}
+.hero .lede,.ins-hero .lede{animation-delay:.85s}
+.hero .ctas{animation-delay:1.05s}
+
+/* Scroll reveal: only applied by script to elements that start below the fold */
+.rv-wait{opacity:0;transform:translateY(28px);filter:blur(6px)}
+.rv-in{transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),filter .9s ease;transition-delay:var(--d,0s)}
+
+/* Scroll-scrubbed statement: words light up as you read down */
+.scrub-w{transition:opacity .25s linear}
+
+/* Service marquee */
+.marquee{background:var(--band);color:var(--band-fg);overflow:hidden;border-block:1px solid rgba(255,255,255,.08)}
+.marquee-track{display:flex;width:max-content;animation:marquee 48s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee ul{display:flex;list-style:none;margin:0;padding:16px 0;gap:0}
+.marquee li{font-family:var(--f-display);font-size:clamp(1.05rem,1.8vw,1.35rem);white-space:nowrap;padding-inline:28px;display:flex;align-items:center;gap:28px}
+.marquee li::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--ochre);flex:none;margin-left:28px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* Cards and people: hover depth */
+.svc article{transition:background-color .3s ease,box-shadow .3s ease;position:relative}
+.svc article::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--ochre);transform:scaleX(0);transform-origin:0 50%;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.svc article:hover{background:var(--surface);box-shadow:0 18px 40px -24px rgba(29,23,77,.35)}
+.svc article:hover::before{transform:scaleX(1)}
+.portrait{overflow:hidden}
+.portrait img{transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+.person:hover .portrait img{transform:scale(1.05)}
+.post,.card,.feature,.quote{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.post:hover,.card:not(.soon):hover,.feature:hover{transform:translateY(-4px)}
+.card:not(.soon):hover,.feature:hover{box-shadow:0 22px 44px -28px rgba(29,23,77,.45)}
+.chips span{transition:background-color .25s ease,border-color .25s ease,transform .25s ease}
+.chips span:hover{border-color:var(--ochre);transform:translateY(-2px)}
+
+/* Headcount tool: result refresh */
+@keyframes resultIn{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+.result.bump{animation:resultIn .45s cubic-bezier(.2,.7,.2,1)}
+.tool output{transition:color .2s ease}
+
+/* Week card: today marker */
+.log li{position:relative}
+.log li.now::before{content:"";position:absolute;left:-14px;top:17px;width:6px;height:6px;border-radius:50%;background:var(--ochre);box-shadow:0 0 0 0 rgba(139,197,63,.6);animation:ping 2s ease-out infinite}
+@keyframes ping{to{box-shadow:0 0 0 10px rgba(139,197,63,0)}}
+
+@media (prefers-reduced-motion:reduce){
+  .hero::before,.split-w,.hero .kicker,.hero .lede,.hero .ctas,.ins-hero .eyebrow,.ins-hero .lede,.marquee-track,.log li.now::before{animation:none!important}
+  .marquee-track{width:auto}.marquee ul[aria-hidden]{display:none}.marquee ul{flex-wrap:wrap;justify-content:center}
+  .rv-wait{opacity:1;transform:none;filter:none}
+  .progress{display:none}
+  .btn:hover,.post:hover,.card:hover,.feature:hover,.chips span:hover{transform:none}
+}

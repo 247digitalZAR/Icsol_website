@@ -1,0 +1,29 @@
+old_path,new_path,status,note
+/about-us/,/about/,301,Legacy company page
+/our-people/,/about/,301,Legacy team page
+/contact/,/contact/,301,Legacy contact page
+/popi/,/privacy/,301,Legacy POPI policy
+/email-terms-and-conditions/,/privacy/,301,Legacy privacy and terms page
+/submit-your-cv/,/job-seekers/,301,Legacy candidate submission page
+/job-search/,/job-seekers/,301,Legacy job search page
+/news/,/insights/,301,Legacy news index
+/demystifying-the-recruitment-process/,/insights/,301,Legacy recruitment article
+/whats-available-out-there/,/insights/,301,Legacy recruitment article
+/understanding-an-advert/,/insights/,301,Legacy recruitment article
+/do-i-do-this-myself-or-should-i-get-help/,/insights/,301,Legacy recruitment article
+/competency-based-hr-decision-making/,/insights/,301,Legacy recruitment article
+/category/uncategorised/,/insights/,301,Legacy article archive
+/category/news/,/insights/,301,Legacy article archive
+/category/interviews/,/insights/,301,Legacy article archive
+/category/other/,/insights/,301,Legacy article archive
+/category/the-recruitment-process/,/insights/,301,Legacy article archive
+/tag/hiring/,/insights/,301,Legacy article tag
+/tag/selection/,/insights/,301,Legacy article tag
+/tag/recruitment/,/insights/,301,Legacy article tag
+/tag/competency/,/insights/,301,Legacy article tag
+/tag/employment/,/insights/,301,Legacy article tag
+/thanks/,/,301,Legacy form confirmation
+/test/,/,301,Legacy test page
+/services,/services/,301,Legacy service alias
+/jobs,/job-seekers/,301,Legacy jobs alias
+/vacancies,/job-seekers/,301,Legacy vacancies alias
