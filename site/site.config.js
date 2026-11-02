@@ -5,7 +5,7 @@ window.ICS_CONFIG = Object.freeze({
   CHATBOT_EMBED: "",
   GTM_ID: "",
   VACANCIES_URL: "",
-  SHOW_TESTIMONIALS: false
+  SHOW_TESTIMONIALS: true
 });
 
 /* Kept as editable data so ICS can amend the sizing guide without changing UI logic. */
@@ -32,12 +32,12 @@ window.ICS_TIERS = [
     max: 100,
     title: "Three days a week",
     body: "Your HR function, run for you: a senior HR executive on site most of the week, with the wider ICS team behind them.",
-    list: ["Regular on-site days, plus same-day cover", "HR policies, procedures and compliance audits", "Employment equity and skills development reporting", "Workforce planning and recruitment for growth roles"]
+    list: ["Regular on-site days, plus same-day cover", "HR policies, procedures and compliance audits", "Employment equity and skills development reporting", "Organisational design and recruitment for growth roles"]
   },
   {
     max: 249,
     title: "A full outsourced HR function",
-    body: "A dedicated HR lead on site most days, backed by labour law, IR and recruitment specialists. The capability of an HR department, without building one.",
+    body: "A dedicated HR lead on site most days, backed by labour law, IR and recruitment specialists.",
     list: ["A dedicated HR lead, four to five days a week", "Industrial relations and union engagement", "Training, facilitation and leadership development", "Monthly HR reporting to management"]
   },
   {

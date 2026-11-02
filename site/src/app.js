@@ -7,7 +7,7 @@
   const consentWording = "I agree that ICS may use these details to contact me about my enquiry, in line with the ICS POPIA privacy notice. You can ask us to delete them at any time.";
   const checklistConsentWording = "I request the small business HR compliance checklist and agree that ICS may use my email address to send it to me, in line with the ICS POPIA privacy notice.";
   const formSubmitEndpoint = "https://formsubmit.co/ajax/admin@icsol.co.za";
-  const assetVersion = "20261030.5";
+  const assetVersion = "20261102.2";
   const hasValue = (value) => typeof value === "string" && value.trim().length > 0;
 
   function event(name, detail = {}) {
@@ -60,11 +60,24 @@
     }
   }
 
+  function openCookieSettings() {
+    const banner = document.querySelector(".cookie-banner");
+    if (!banner) return;
+    banner.hidden = false;
+    banner.querySelector("[data-consent=accepted]")?.focus();
+  }
+
   function initCookieBanner() {
     document.querySelectorAll("[data-consent]").forEach((button) => {
       button.addEventListener("click", () => {
         localStorage.setItem(consentKey, button.dataset.consent);
         applyConsent();
+      });
+    });
+    document.querySelectorAll("[data-cookie-settings]").forEach((link) => {
+      link.addEventListener("click", (click) => {
+        click.preventDefault();
+        openCookieSettings();
       });
     });
     applyConsent();
@@ -90,7 +103,11 @@
     const range = document.getElementById("headcount");
     const output = document.getElementById("hc-out");
     const result = document.querySelector(".result");
-    if (!range || !output || !result) return;
+    const title = document.getElementById("r-title");
+    const body = document.getElementById("r-body");
+    const list = document.getElementById("r-list");
+    if (!range || !output || !result || !title || !body || !list) return;
+    const tiers = Array.isArray(window.ICS_TIERS) ? window.ICS_TIERS : [];
     const stops = [[0, 5], [400, 25], [600, 50], [800, 100], [1000, 250]];
     const peopleForValue = (value) => {
       for (let index = 1; index < stops.length; index += 1) {
@@ -106,19 +123,20 @@
     const update = () => {
       const people = peopleForValue(Number(range.value));
       const label = `${people}${people >= 250 ? "+" : ""}`;
-      const tier = (window.ICS_TIERS || []).find((item) => people <= item.max);
+      const tier = tiers.find((item) => people <= item.max);
       output.textContent = label;
       range.setAttribute("aria-valuetext", `${label} people`);
       if (!tier) return;
-      document.getElementById("r-title").textContent = tier.title;
-      document.getElementById("r-body").textContent = tier.body;
-      document.getElementById("r-list").innerHTML = tier.list.map((item) => `<li>${item}</li>`).join("");
+      title.textContent = tier.title;
+      body.textContent = tier.body;
+      list.innerHTML = (tier.list || []).map((item) => `<li>${item}</li>`).join("");
       result.classList.remove("bump");
       void result.offsetWidth;
       result.classList.add("bump");
       event("slider_change", { tier: tier.title, page: location.pathname });
     };
     range.addEventListener("input", update);
+    range.addEventListener("change", update);
     update();
   }
 
@@ -221,6 +239,12 @@
     link.rel = "noopener";
   }
 
+  function initTestimonials() {
+    document.querySelectorAll("[data-testimonials]").forEach((section) => {
+      section.hidden = config.SHOW_TESTIMONIALS !== true;
+    });
+  }
+
   function initAnalyticsEvents() {
     document.querySelectorAll("a.btn, a[href^='tel:'], a[href^='mailto:']").forEach((link) => {
       link.addEventListener("click", () => {
@@ -249,6 +273,7 @@
     loadDemoChat();
     initInsightFilters();
     initVacanciesLink();
+    initTestimonials();
     initAnalyticsEvents();
     document.querySelector(".chat-launcher")?.addEventListener("click", () => event("chat_open", { page: location.pathname }));
   });

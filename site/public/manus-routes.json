@@ -17,6 +17,14 @@
       "title": "Human resource strategy"
     },
     {
+      "path": "/services/hr-technology-and-ai/",
+      "title": "HR technology and AI"
+    },
+    {
+      "path": "/services/people-analytics-and-workforce-insights/",
+      "title": "People analytics and workforce insights"
+    },
+    {
       "path": "/services/contracts-and-policies/",
       "title": "Contracts and policies"
     },
@@ -34,7 +42,7 @@
     },
     {
       "path": "/services/workforce-planning/",
-      "title": "Workforce planning"
+      "title": "Organisational design"
     },
     {
       "path": "/services/training-and-facilitation/",
@@ -71,6 +79,10 @@
     {
       "path": "/job-seekers/",
       "title": "Job seekers"
+    },
+    {
+      "path": "/job-seekers/submit-cv/",
+      "title": "Submit your CV"
     },
     {
       "path": "/contact/",

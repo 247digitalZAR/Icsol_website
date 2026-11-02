@@ -18,7 +18,8 @@ REFERENCE_INSIGHTS_CSS = ROOT.parent / "design-reference" / "assets" / "css" / "
 REFERENCE_EFFECTS_CSS = ROOT.parent / "design-reference" / "assets" / "css" / "effects.css"
 REFERENCE_EFFECTS_JS = ROOT.parent / "design-reference" / "assets" / "js" / "effects.js"
 BASE_URL = "https://icsol.co.za"
-ASSET_VERSION = "20261030.5"
+ASSET_VERSION = "20261102.2"
+STYLES_VERSION = "20261102.3"
 
 CONTACT = {
     "streetAddress": "18 Ebony Road",
@@ -33,92 +34,57 @@ CONTACT = {
 
 SERVICES = [
     ("hr-strategy", "Strategy", "Human resource strategy", "We develop a human resource strategy that underpins your organisational strategic goals and objectives, so your people plan and your business plan pull in the same direction.", "Mark Meredith", None),
+    ("hr-technology-and-ai", "Technology", "HR technology and AI", "The right HR systems and practical AI, chosen and introduced so your people use them and your business stays in control.", "Mark Meredith", "/insights/ai-at-work-popia/"),
+    ("people-analytics-and-workforce-insights", "Analytics", "People analytics and workforce insights", "Clear HR data that shows what is happening in your workforce and where leadership needs to act.", "Mark Meredith", None),
     ("contracts-and-policies", "Compliance", "Contracts and policies", "Employment contracts, a disciplinary code and the policies you're legally expected to have, written for how your business actually runs.", "Marianne Steyn", "/insights/year-end-closedown/"),
     ("discipline-and-ccma", "Employee relations", "Discipline and the CCMA", "Warnings, hearings and grievances handled by the book, so a dismissal stands up if it's challenged. Representation when it gets that far.", "Caron Webb", "/insights/first-disciplinary-hearing-ccma/"),
     ("structure-culture-od", "Structure", "Structure, culture and organisational development", "Org structures, job descriptions and development work that turn your strategy into clear roles and build the culture you want as you grow.", "Mark Meredith", None),
     ("performance-and-incentives", "Performance", "Reviews and incentives", "A performance review framework and incentives linked to outcomes, so pay rewards the results that matter to you.", "Mark Meredith", None),
-    ("workforce-planning", "Planning", "Workforce planning", "Which roles you'll need, when, and whether to hire, develop or contract, decided before growth forces a rushed hire.", "Mark Meredith", None),
+    ("workforce-planning", "Design", "Organisational design", "The structure, roles and operating model that make the business easier to run today and ready for the change ahead.", "Mark Meredith", None),
     ("training-and-facilitation", "Development", "Training and facilitation", "Customised training for supervisors and teams, and facilitated sessions to carry people through change: restructures, new managers, new systems.", "Marianne Steyn", None),
     ("recruitment", "Supporting service", "Recruitment", "Executive search, and permanent and contract placements, from the same team that wrote the job description.", "Barbara Henshilwood", None),
 ]
 
-SERVICE_COPY = {
+SERVICE_DETAILS = {
     "hr-strategy": (
-        [
-            "A review of your current people practices against your business plan",
-            "A people strategy for the next 12 months, with clear priorities",
-            "The roles, skills and structure you'll need to deliver it",
-            "Regular check-ins with you and your leadership team to keep it on track",
-        ],
-        "Owners and leadership teams planning growth, a restructure or a new direction, who want their people plan to keep pace with the business plan.",
+        "A review of your business plan and current people practices; an HR strategy and people plan aligned to your goals; priorities, owners and timelines for the next 12 months; quarterly check-ins to keep it on track.",
+        "Owners and MDs planning growth, a restructure or a new phase, who want their people plan and business plan pulling in the same direction.",
+    ),
+    "hr-technology-and-ai": (
+        "HR systems selection and implementation; AI readiness assessments; AI process automation; Generative AI adoption; workforce AI governance.",
+        "Businesses choosing a new HR system, automating repetitive processes or introducing generative AI where employees, data and governance all need to be considered.",
+    ),
+    "people-analytics-and-workforce-insights": (
+        "HR dashboards and reporting; absenteeism analysis; engagement pulse surveys; workforce risk analysis; culture surveys.",
+        "Owners and leadership teams who want a clear view of employee engagement, attendance, risk and the patterns affecting their workforce.",
     ),
     "contracts-and-policies": (
-        [
-            "Employment contracts for permanent, fixed-term and part-time staff",
-            "A disciplinary code and procedure that fits how you operate",
-            "Core policies, including leave, remote work, social media and POPIA in the workplace",
-            "An employee handbook that pulls it all together",
-            "Updates when the BCEA, LRA, EEA or POPIA change",
-        ],
-        "Businesses using old templates, with staff who have never signed a contract, or about to make their next hire.",
+        "Employment contracts for permanent, fixed-term and part-time employees; a disciplinary code and procedure; core workplace policies (leave, remote work, IT and social media, POPIA, harassment); a check of existing documents against the BCEA, LRA and EEA.",
+        "Businesses with missing, outdated or copied-from-the-internet contracts and policies, and any business about to hire.",
     ),
     "discipline-and-ccma": (
-        [
-            "Advice before you act, so the process is right from the first conversation",
-            "Investigations and notices of allegations",
-            "Independent chairing of disciplinary hearings",
-            "Grievance handling",
-            "CCMA preparation, from documents to witnesses, and representation where the rules allow",
-        ],
-        "Any owner or manager dealing with misconduct, poor performance, a grievance or a CCMA referral.",
+        "Advice before you act; warnings and investigations; chairing or preparing disciplinary hearings; grievance handling; CCMA case preparation and representation where the rules allow.",
+        "Owners and managers dealing with misconduct, poor performance, a grievance or a CCMA referral, who need it done fairly and by the book.",
     ),
     "structure-culture-od": (
-        [
-            "Organisational structure and reporting lines that match your strategy",
-            "Job descriptions and role profiles for every position",
-            "Support through restructuring and change",
-            "Facilitated sessions that build the culture you want as you grow",
-        ],
-        "Businesses that have outgrown an informal structure, are bringing teams together, or are going through change.",
+        "Organisational structure design; job descriptions and role clarity; culture and engagement work; support through restructures and change.",
+        "Growing businesses where roles have blurred, reporting lines are unclear or the culture needs work as the team gets bigger.",
     ),
     "performance-and-incentives": (
-        [
-            "A performance review framework, with templates your managers will use",
-            "Clear outcomes and measures for each role",
-            "Probation management for new hires",
-            "Incentive and bonus schemes linked to results",
-            "Coaching for managers on review conversations",
-        ],
-        "Owners who want staff to know what good looks like, and pay that rewards the results that matter.",
+        "A performance review framework; KPIs and goals linked to business outcomes; incentive and bonus scheme design; training for managers who run the reviews.",
+        "Businesses that want people to know what good looks like, and pay that rewards the results that matter.",
     ),
     "workforce-planning": (
-        [
-            "A review of your current team, roles and skills",
-            "The roles you'll need over the next 12 to 24 months",
-            "Hire, develop or contract decisions for each one",
-            "Succession planning for key people",
-            "Employment equity planning once you reach 50 employees",
-        ],
-        "Growing businesses, and those planning a new site, service line or expansion.",
+        "Organisational design; operating model design; role architecture; job evaluation; performance management system design and implementation; workforce restructuring.",
+        "Businesses changing how work gets done, clarifying roles, planning growth or working through a restructure.",
     ),
     "training-and-facilitation": (
-        [
-            "Training for supervisors and new managers, from discipline to difficult conversations",
-            "Workshops on your contracts, policies and procedures",
-            "Facilitated strategy, team and change sessions",
-            "Content customised to your industry and your people",
-        ],
-        "Businesses promoting people into management for the first time, and teams going through change.",
+        "Customised training for supervisors and managers; team sessions on conduct, performance and communication; team effectiveness workshops; facilitated workshops through change, such as restructures, new managers or new systems.",
+        "Businesses promoting people into management for the first time, or taking a team through change.",
     ),
     "recruitment": (
-        [
-            "Executive search for senior roles",
-            "Permanent and contract placements",
-            "A clear job description and competency profile before the search starts",
-            "Shortlisting, interviews and assessment",
-            "Reference and qualification checks",
-        ],
-        "Businesses hiring for skilled, professional and senior roles across South Africa. Because recruitment sits with the same team as your HR, the person who wrote the job description is the one finding the candidates.",
+        "Job descriptions and competency profiles; executive search; permanent and contract placements; interviews, assessments and shortlists; employer value proposition development; employer recruitment branding.",
+        "Businesses hiring for skilled, professional or senior roles that want the person who understands the role to find the candidate.",
     ),
 }
 
@@ -148,6 +114,7 @@ ROUTES = [
     ("/insights/first-disciplinary-hearing-ccma/", ARTICLE_META["ccma-hearing"][0]),
     ("/insights/do-you-need-an-hr-manager/", ARTICLE_META["hr-manager"][0]),
     ("/job-seekers/", "Job seekers"),
+    ("/job-seekers/submit-cv/", "Submit your CV"),
     ("/contact/", "Contact"),
     ("/privacy/", "Privacy"),
 ]
@@ -155,6 +122,20 @@ ROUTES = [
 
 def compact(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
+
+
+def balance_people_terms(content: str) -> str:
+    """Make targeted terminology changes while keeping legal and testimonial copy intact."""
+    replacements = (
+        ("Better staff", "The right employees"),
+        ("More productive staff", "A more productive workforce"),
+        ("Someone staff can raise problems with", "Someone employees can raise concerns with"),
+        ("Staff pasting client details into chatbots", "Employees pasting client details into chatbots"),
+        ("workforce planning and steady recruitment", "organisational design and steady recruitment"),
+    )
+    for original, replacement in replacements:
+        content = content.replace(original, replacement)
+    return content
 
 
 def extract_section(document: str, section_id: str) -> str:
@@ -243,16 +224,17 @@ def shared_footer() -> str:
     return f'''<footer class="site"><div class="wrap footer-grid">
   <div><strong>Intrinsic Consulting Solutions</strong><span>18 Ebony Road, Tokai, Cape Town, 7945</span><a href="mailto:{CONTACT['email']}">{CONTACT['email']}</a></div>
   <div><strong>Speak to us</strong><a href="tel:+27829219965">Cape Town: {CONTACT['capeTown']}</a><a href="tel:+27791032490">Johannesburg: {CONTACT['johannesburg']}</a></div>
-  <div><strong>Explore</strong><a href="/services/">Services</a><a href="/insights/">Insights</a><a href="/privacy/">Privacy</a><a href="{CONTACT['linkedin']}" target="_blank" rel="noopener">LinkedIn</a></div>
+  <div><strong>Explore</strong><a href="/services/">Services</a><a href="/insights/">Insights</a><a href="/privacy/">Privacy</a><a class="cookie-settings-link" href="#cookie-settings" data-cookie-settings>Cookie settings</a><a href="{CONTACT['linkedin']}" target="_blank" rel="noopener">LinkedIn</a></div>
   <div class="copyright">© 2026 Intrinsic Consulting Solutions. Outsourced HR, IR and recruitment.</div>
 </div></footer>'''
 
 
-def document(title: str, description: str, path: str, content: str, active: str = "", schemas: list[dict] | None = None, include_insights_css: bool = False) -> str:
+def document(title: str, description: str, path: str, content: str, active: str = "", schemas: list[dict] | None = None, include_insights_css: bool = False, robots: str | None = None) -> str:
     canonical = BASE_URL + path
     title_html = html.escape(title, quote=True)
     description_html = html.escape(description, quote=True)
-    insights_stylesheet = f'<link rel="stylesheet" href="/css/insights.css?v={ASSET_VERSION}">' if include_insights_css else ""
+    insights_stylesheet = f'<link rel="stylesheet" href="/css/insights.css?v={STYLES_VERSION}">' if include_insights_css else ""
+    robots_tag = f'  <meta name="robots" content="{html.escape(robots, quote=True)}">\n' if robots else ""
     schema_list = [professional_schema()]
     if path != "/":
         schema_list.append(breadcrumb(path, title.split(" | ")[0]))
@@ -266,12 +248,12 @@ def document(title: str, description: str, path: str, content: str, active: str 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{title_html}</title>
   <meta name="description" content="{description_html}">
-  <link rel="canonical" href="{canonical}">
+{robots_tag}  <link rel="canonical" href="{canonical}">
   <meta property="og:type" content="website"><meta property="og:site_name" content="Intrinsic Consulting Solutions">
   <meta property="og:title" content="{title_html}"><meta property="og:description" content="{description_html}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{BASE_URL}/assets/img/hero-concept.jpg">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title_html}"><meta name="twitter:description" content="{description_html}">
   <link rel="icon" href="/assets/img/ics-logo.png" type="image/png">
-  <link rel="stylesheet" href="/assets/fonts/fonts.css?v={ASSET_VERSION}"><link rel="stylesheet" href="/css/styles.css?v={ASSET_VERSION}">{insights_stylesheet}<link rel="stylesheet" href="/css/effects.css?v={ASSET_VERSION}">
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v={STYLES_VERSION}"><link rel="stylesheet" href="/css/styles.css?v={STYLES_VERSION}">{insights_stylesheet}<link rel="stylesheet" href="/css/effects.css?v={ASSET_VERSION}">
   <script type="application/ld+json">{schema}</script>
 </head>
 <body>
@@ -281,7 +263,7 @@ def document(title: str, description: str, path: str, content: str, active: str 
 	<button class="chat-launcher" type="button" hidden aria-label="Open chat">Chat</button>
 	<div class="cookie-banner" role="dialog" aria-label="Privacy choices" aria-live="polite"><p>We use cookies for analytics and chat only if you accept. Read our <a href="/privacy/">POPIA privacy notice</a>.</p><div><button class="btn btn-ghost" type="button" data-consent="declined">Decline</button><button class="btn btn-primary" type="button" data-consent="accepted">Accept</button></div></div>
 	<script src="/site.config.js?v={ASSET_VERSION}"></script><script src="/js/effects.js?v={ASSET_VERSION}" defer></script><script src="/js/app.js?v={ASSET_VERSION}" defer></script>
-</body></html>'''
+	</body></html>'''
 
 
 def services_grid() -> str:
@@ -314,8 +296,23 @@ def home_page(reference: str) -> str:
     main_match = re.search(r'<main id="top">(.*?)</main>', reference, re.S)
     if not main_match:
         raise RuntimeError("Could not read approved homepage main content")
-    content = main_match.group(1)
-    content = re.sub(r'<section\b[^>]*\bid="clients"[^>]*>.*?</section>', '', content, flags=re.S)
+    content = balance_people_terms(main_match.group(1))
+    content = content.replace("<li>Workforce planning</li>", "<li>Organisational design</li>")
+    content = content.replace("<li>Organisational design</li><li>Organisational design</li>", "<li>Organisational design</li>")
+    content = content.replace("<li>Executive search</li></ul>", "<li>Executive search</li><li>HR technology &amp; AI</li><li>People analytics</li></ul>")
+    content = content.replace("<span>Workforce planning</span>", "<span>Operating model design</span>")
+    client_references = '''<section class="band" id="clients" data-testimonials hidden>
+  <div class="wrap">
+    <p class="eyebrow">What clients say</p>
+    <h2 style="margin-top:12px">From the businesses we work with.</h2>
+    <div class="quotes">
+      <figure class="quote" style="margin:0"><p>“Barbara provides an exceptional level of personal care and dedication. Her attentive, client-first approach and seamless communication make working with her an absolute pleasure.”</p><span>Doreen van Rooyen - HR Manager – Nexia (50 -100 staff)</span></figure>
+      <figure class="quote" style="margin:0"><p>“We have really valued working with Intrinsic Consulting Solutions. Their professional, responsive, and practical approach makes them a trusted business partner.”</p><span>André Barnard – MD – Berlin packaging (50 – 100 staff)</span></figure>
+      <figure class="quote" style="margin:0"><p>“Intrinsic Consulting Solutions consistently provides an exceptional level of service and high-quality candidates that align perfectly with my needs. I have had the pleasure of working with Barbara for many years; her ability to match profiles not only to the job spec but also to the company culture and its leadership is a talent that I truly value and appreciate.”</p><span>Andrew Mc Donald - Head of People – Discover Africa Group (20 – 50 staff)</span></figure>
+    </div>
+  </div>
+</section>'''
+    content = re.sub(r'<section\b[^>]*\bid="clients"[^>]*>.*?</section>', client_references, content, flags=re.S)
     content = re.sub(r'<section\b[^>]*\bid="services"[^>]*>.*?</section>', f'''<section class="band" id="services"><div class="wrap"><div class="svc-head"><div><p class="eyebrow">What your HR person handles</p><h2 style="margin-top:12px">One person on your team. A full HR function behind them.</h2></div><p class="lede">Outsourced or fractional, you deal with one HR executive who knows your business. When something needs a specialist, they bring in a colleague from the ICS team.</p></div>{services_grid()}</div></section>''', content, flags=re.S)
     closing = '''<section class="band steps-band closing-cta"><div class="wrap"><p class="eyebrow">Book an HR Health Check</p><h2 style="margin-top:12px">Find out where your business stands.</h2><p class="lede">Tell us a little about your business. We'll call you back within one business day to set up your health check.</p><p class="steps-cta"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a><span>The questionnaire takes about 5 minutes. Results in about 2 days.</span></p></div></section>'''
     content = re.sub(r'<section\b[^>]*\bid="contact"[^>]*>.*?</section>', closing, content, flags=re.S)
@@ -339,36 +336,38 @@ def health_check_page(reference: str) -> str:
     size = extract_section(reference, "size")
     contact = extract_section(reference, "contact")
     faq = extract_section(reference, "faq")
+    steps = steps.replace('href="#contact"', 'href="#booking-form"')
+    steps = re.sub(r'\s*<h2\b[^>]*>Start with a health check\. Decide from there\.</h2>\s*<p class="lede">No long contract up front\. We look at where your business stands first, then agree what level of support makes sense\.</p>', '', steps, count=1)
     size = rewrite_reference_assets(size)
     contact = lead_form_markup(rewrite_reference_assets(contact))
+    contact = contact.replace('id="contact"', 'id="booking-form"')
     return f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">Book an HR Health Check</p><h1>Start with a health check. Decide from there.</h1><p class="lede">No long contract up front. We look at where your business stands first, then agree what level of support makes sense.</p></div></section>{steps}{size}{contact}{faq}'''
 
 
 def services_page() -> str:
-    corporate = '''<section class="band corp"><div class="wrap corp-grid"><div><p class="eyebrow">Already have an HR team?</p><h2 style="margin-top:12px">We take the project work off your desk.</h2><p class="lede">Corporate HR managers bring us in for the work that never gets done between day-to-day queries. Fixed scope, fixed fee, delivered to your standards.</p></div><div class="chips" aria-label="Typical corporate projects"><span>HR strategy</span><span>Workforce planning</span><span>Job description libraries</span><span>Organisational design</span><span>Performance frameworks</span><span>Competency frameworks</span><span>Policy reviews</span><span>Change management</span><span>Incentive design</span><span>Recruitment and executive search</span></div></div></section>'''
+    corporate = '''<section class="band corp"><div class="wrap corp-grid"><div><p class="eyebrow">Already have an HR team?</p><h2 style="margin-top:12px">We take the project work off your desk.</h2><p class="lede">Corporate HR managers bring us in for the work that never gets done between day-to-day queries. Fixed scope, fixed fee, delivered to your standards.</p></div><div class="chips" aria-label="Typical corporate projects"><span>HR strategy</span><span>Operating model design</span><span>Job description libraries</span><span>Organisational design</span><span>Performance frameworks</span><span>Competency frameworks</span><span>Policy reviews</span><span>Change management</span><span>Incentive design</span><span>Recruitment and executive search</span></div></div></section>'''
     return f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">What your HR person handles</p><h1>One person on your team. A full HR function behind them.</h1><p class="lede">Outsourced or fractional, you deal with one HR executive who knows your business. When something needs a specialist, they bring in a colleague from the ICS team.</p></div></section><section class="band"><div class="wrap">{services_grid()}</div></section>{corporate}<section class="band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
 
 
 def service_page(service: tuple[str, str, str, str, str, str | None]) -> str:
     slug, category, title, intro, lead, related = service
-    included, audience = SERVICE_COPY[slug]
-    included_markup = "".join(f"<li>{item}</li>" for item in included)
+    included, audience = SERVICE_DETAILS[slug]
     related_markup = f'<p><a class="btn btn-ghost" href="{related}">Read the related Insight</a></p>' if related else ""
     return f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">{category}</p><h1>{title}</h1><p class="lede">{intro}</p></div></section>
-<section class="band"><div class="wrap service-detail"><div><p class="eyebrow">What's included</p><ul class="service-list">{included_markup}</ul></div><div><p class="eyebrow">Who it's for</p><p>{audience}</p></div><aside class="service-team"><p class="eyebrow">Your ICS lead</p><h2>{lead}</h2><p><a href="/about/">Meet our people</a></p>{related_markup}</aside></div></section>
+<section class="band"><div class="wrap service-detail"><div><p class="eyebrow">What's included</p><p>{included}</p></div><div><p class="eyebrow">Who it's for</p><p>{audience}</p></div><aside class="service-team"><p class="eyebrow">Your ICS lead</p><h2>{lead}</h2><p><a href="/about/">Meet our people</a></p>{related_markup}</aside></div></section>
 <section class="band steps-band closing-cta"><div class="wrap"><h2>Start with a health check. Decide from there.</h2><p class="steps-cta"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a><span>The questionnaire takes about 5 minutes. Results in about 2 days.</span></p></div></section>'''
 
 
-def about_page(reference: str) -> str:
+def about_page(reference: str) -> tuple[str, list[dict]]:
     team = rewrite_reference_assets(extract_section(reference, "team"))
     person_schema = [{"@context": "https://schema.org", "@type": "Person", "name": name, "worksFor": {"@type": "Organization", "name": "Intrinsic Consulting Solutions"}} for name in ["Barbara Henshilwood", "Mark Meredith", "Marianne Steyn", "Caron Webb"]]
-    content = f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">About ICS</p><h1>Outsourced and fractional HR for South African small to medium-sized businesses.</h1><p class="lede">Intrinsic Consulting Solutions was founded in Cape Town in 2017. For many years we were best known for recruitment. Over time, the businesses we recruited for needed more than new people: contracts that hold up, disciplinary processes done properly, and structures that make sense as they grow.</p><p class="lede">Today ICS is an outsourced and fractional HR partner for small to medium-sized businesses across South Africa, with recruitment still part of what we do. Our head office is in Tokai, Cape Town, with a presence in Johannesburg.</p></div></section>
+    content = f'''<section class="page-hero"><div class="wrap"><p class="eyebrow">About ICS</p><h1>Outsourced and fractional HR for South African small to medium-sized businesses.</h1><p class="lede">ICS was founded in Cape Town in 2017. Our HR executives have each spent 20 years or more running HR inside real businesses, in South Africa, across Africa and overseas. Today we give small and medium-sized businesses that same senior experience, for the hours they actually need.</p></div></section>
 <div class="proof"><div class="wrap"><div><strong>Since 2017</strong><span>Cape Town head office, Johannesburg presence</span></div><div><strong>4 HR executives</strong><span>Each with 20+ years in HR, IR or labour law</span></div><div><strong>CCMA-tested</strong><span>Disciplinaries, grievances and representation</span></div><div><strong>Global depth</strong><span>Experience with brands like Coca-Cola, DHL and Toyota</span></div></div></div>{team}<section class="band steps-band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
     return content, person_schema
 
 
 def insight_cards() -> str:
-    return '''<section class="band ins-index"><div class="wrap"><div class="filters" role="group" aria-label="Filter by topic"><button type="button" class="chip on" data-filter="all">All topics</button><button type="button" class="chip" data-filter="compliance">Compliance</button><button type="button" class="chip" data-filter="er">Employee relations</button><button type="button" class="chip" data-filter="growing">Growing a team</button><button type="button" class="chip" data-filter="ai">AI &amp; the workplace</button></div><a class="feature" href="/insights/year-end-closedown/" data-category="compliance"><div class="feature-art" aria-hidden="true"><span>DEC</span><b>16 · 25 · 26</b><span>JAN 1</span></div><div class="feature-body"><span class="meta">Compliance · 5 min read · Featured</span><h2>Year-end closedown: leave, public holidays and pay over December</h2><p>Shutdown leave, the Day of Goodwill falling on a Saturday, and who gets paid what if they work on the 16th. A practical checklist for the next six weeks.</p><span class="more">Read the article</span></div></a><div class="cards"><a class="card" href="/insights/ai-at-work-popia/" data-category="ai"><span class="meta">AI &amp; the workplace · 6 min</span><h3>AI at work: what POPIA means for your business</h3><p>Staff pasting client details into chatbots, smart glasses in meetings, AI screening CVs. The law hasn't changed. The risks have.</p><span class="more">Read the article</span></a><a class="card" href="/insights/first-disciplinary-hearing-ccma/" data-category="er"><span class="meta">Employee relations · 6 min</span><h3>Your first disciplinary hearing: what the CCMA will look for</h3><p>A fair reason and a fair process. The steps owners skip most often, and why skipping them costs more than the hearing.</p><span class="more">Read the article</span></a><a class="card" href="/insights/do-you-need-an-hr-manager/" data-category="growing"><span class="meta">Growing a team · 4 min</span><h3>Do you need an HR manager yet? A guide by headcount</h3><p>What changes at 10, 25 and 50 employees, and the point at which DIY HR starts costing more than it saves.</p><span class="more">Read the article</span></a><div class="card soon" data-category="compliance"><span class="meta">Compliance · Coming soon</span><h3>Employment contracts: the clauses most small business contracts are missing</h3><p>Probation, restraint of trade, remote work and POPIA consent. What to check in the contracts you already have.</p></div><div class="card soon" data-category="compliance"><span class="meta">Compliance · Coming soon</span><h3>What's changing in South African labour law</h3><p>A plain-English round-up of recent and upcoming changes, and what each one means for a business with 5 to 50 people.</p></div></div><p class="empty" data-filter-empty hidden>No articles in this topic yet.</p></div></section>'''
+    return '''<section class="band ins-index"><div class="wrap"><div class="filters" role="group" aria-label="Filter by topic"><button type="button" class="chip on" data-filter="all">All topics</button><button type="button" class="chip" data-filter="compliance">Compliance</button><button type="button" class="chip" data-filter="er">Employee relations</button><button type="button" class="chip" data-filter="growing">Growing a team</button><button type="button" class="chip" data-filter="ai">AI &amp; the workplace</button></div><a class="feature" href="/insights/year-end-closedown/" data-category="compliance"><div class="feature-art" aria-hidden="true"><span>DEC</span><b>16 · 25 · 26</b><span>JAN 1</span></div><div class="feature-body"><span class="meta">Compliance · 5 min read · Featured</span><h2>Year-end closedown: leave, public holidays and pay over December</h2><p>Shutdown leave, the Day of Goodwill falling on a Saturday, and who gets paid what if they work on the 16th. A practical checklist for the next six weeks.</p><span class="more">Read the article</span></div></a><div class="cards"><a class="card" href="/insights/ai-at-work-popia/" data-category="ai"><span class="meta">AI &amp; the workplace · 6 min</span><h3>AI at work: what POPIA means for your business</h3><p>Employees pasting client details into chatbots, smart glasses in meetings, AI screening CVs. The law hasn't changed. The risks have.</p><span class="more">Read the article</span></a><a class="card" href="/insights/first-disciplinary-hearing-ccma/" data-category="er"><span class="meta">Employee relations · 6 min</span><h3>Your first disciplinary hearing: what the CCMA will look for</h3><p>A fair reason and a fair process. The steps owners skip most often, and why skipping them costs more than the hearing.</p><span class="more">Read the article</span></a><a class="card" href="/insights/do-you-need-an-hr-manager/" data-category="growing"><span class="meta">Growing a team · 4 min</span><h3>Do you need an HR manager yet? A guide by headcount</h3><p>What changes at 10, 25 and 50 employees, and the point at which DIY HR starts costing more than it saves.</p><span class="more">Read the article</span></a><div class="card soon" data-category="compliance"><span class="meta">Compliance · Coming soon</span><h3>Employment contracts: the clauses most small business contracts are missing</h3><p>Probation, restraint of trade, remote work and POPIA consent. What to check in the contracts you already have.</p></div><div class="card soon" data-category="compliance"><span class="meta">Compliance · Coming soon</span><h3>What's changing in South African labour law</h3><p>A plain-English round-up of recent and upcoming changes, and what each one means for a business with 5 to 50 people.</p></div></div><p class="empty" data-filter-empty hidden>No articles in this topic yet.</p></div></section>'''
 
 
 def magnet() -> str:
@@ -381,7 +380,7 @@ def insights_page() -> str:
 
 def article_page(reference: str, article_id: str) -> tuple[str, dict]:
     title, meta = ARTICLE_META[article_id]
-    article = extract_article(reference, article_id)
+    article = balance_people_terms(extract_article(reference, article_id))
     article = article.replace('class="band post-view"', 'class="band post-view article-page"')
     schema = {
         "@context": "https://schema.org",
@@ -395,7 +394,16 @@ def article_page(reference: str, article_id: str) -> tuple[str, dict]:
 
 
 def job_seekers_page() -> str:
-    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Job seekers</p><h1>Looking for your next role?</h1><p class="lede">We still recruit for skilled and professional positions across South Africa.</p></div></section><section class="careers"><div class="wrap"><div class="vacancies"><p><b>Looking for your next role?</b> We still recruit for skilled and professional positions across South Africa.</p><p>Browse our current vacancies, or send us your CV and we'll be in touch when a role matches your experience.</p><div class="job-actions"><a class="btn btn-ghost" href="https://www.icsol.co.za/job-search/" target="_blank" rel="noopener">Search current vacancies</a><a class="btn btn-primary" href="https://www.icsol.co.za/submit-your-cv/" target="_blank" rel="noopener">Submit your CV</a></div><p class="job-smallprint">How we handle candidate information is set out in our <a href="https://www.icsol.co.za/popi/" target="_blank" rel="noopener">POPI policy</a>.</p></div></div></section><section class="band steps-band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
+    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Job seekers</p><h1>Looking for your next role?</h1><p class="lede">We still recruit for skilled and professional positions across South Africa.</p></div></section>
+<section class="careers"><div class="wrap placement-partner-actions"><a class="btn btn-ghost" href="#available-positions">Search current vacancies</a><a class="btn btn-primary" href="/job-seekers/submit-cv/">Submit your CV</a></div></section>
+<section class="band placement-partner-section" id="available-positions"><div class="wrap"><h2>Available positions</h2><div class="placement-partner-embed"><iframe id="current-vacancies-frame" src="https://webapp.placementpartner.com/wi/weblinks.php?id=intrinsic&amp;logo=0" title="Current vacancies at ICS" loading="eager"></iframe></div><p class="placement-partner-fallback"><a href="https://webapp.placementpartner.com/wi/weblinks.php?id=intrinsic&amp;logo=0" target="_blank" rel="noopener noreferrer">Open vacancies in a new tab</a></p></div></section>
+<section class="band steps-band closing-cta"><div class="wrap"><a class="btn btn-primary" href="/hr-health-check/">Book an HR Health Check</a></div></section>'''
+
+
+def submit_cv_page() -> str:
+    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Job seekers</p><h1>Submit your CV</h1><p class="lede">Send your CV to ICS for consideration for skilled and professional roles across South Africa.</p></div></section>
+<section class="careers"><div class="wrap placement-partner-actions"><a class="btn btn-ghost" href="/job-seekers/#available-positions">Search current vacancies</a><a class="btn btn-primary" href="#submit-cv-form">Submit your CV</a></div></section>
+<section class="band placement-partner-section" id="submit-cv-form"><div class="wrap"><p class="placement-partner-notice">This form sends your CV directly to ICS's live recruitment system. Read our <a href="/privacy/">POPIA privacy notice</a> before submitting.</p><div class="placement-partner-embed placement-partner-embed--cv"><iframe id="submit-cv-frame" src="https://webapp.placementpartner.com/wi/application_form.php?id=intrinsic" title="Submit your CV to ICS through Placement Partner" loading="eager"></iframe></div><p class="placement-partner-fallback"><a href="https://webapp.placementpartner.com/wi/application_form.php?id=intrinsic" target="_blank" rel="noopener noreferrer">Open the CV form in a new tab</a></p></div></section>'''
 
 
 def contact_page(reference: str) -> str:
@@ -407,7 +415,7 @@ def contact_page(reference: str) -> str:
 
 
 def privacy_page() -> str:
-    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Privacy</p><h1>Privacy notice</h1><p class="lede">This notice explains how Intrinsic Consulting Solutions (ICS) handles the personal information you give us through this website, in line with the Protection of Personal Information Act (POPIA).</p></div></section><section class="band"><div class="wrap read"><h2>What we collect</h2><p>When you book an HR Health Check, contact us or request a checklist, we collect your name, business name, email address, phone number, the number of people you employ and anything you choose to tell us in your message.</p><h2>Why we collect it</h2><p>We use it to respond to your enquiry, arrange and deliver your HR Health Check, and send you the resources you ask for. We'll only send you other updates if you agree to receive them, and you can opt out at any time.</p><h2>Who sees it</h2><p>Your information is seen by the ICS team. We use trusted service providers to run this website and our email, and they may only use your information on our instructions. We don't sell your information.</p><h2>How long we keep it</h2><p>We keep your information for as long as we need it to deal with your enquiry or provide our services, or as the law requires.</p><h2>Your rights</h2><p>You can ask us what information we hold about you, ask us to correct or delete it, object to how we use it, or withdraw your consent. Email admin@icsol.co.za.</p><h2>Candidates and job seekers</h2><p>If you apply for a role or send us your CV, our <a href="https://www.icsol.co.za/popi/">POPI policy for candidates</a> applies.</p><h2>Complaints</h2><p>If you're unhappy with how we've handled your information, contact us first at admin@icsol.co.za. You can also complain to the Information Regulator: https://inforegulator.org.za</p><h2>Contact</h2><p>Intrinsic Consulting Solutions, 18 Ebony Road, Tokai, Cape Town, 7945. admin@icsol.co.za. 082 921 9965.</p><p>Last updated: October 2026</p></div></section>'''
+    return '''<section class="page-hero"><div class="wrap"><p class="eyebrow">Privacy</p><h1>POPIA privacy notice</h1><p class="lede"><strong>Intrinsic Consulting Solutions (ICS)</strong><br>Last updated: 31 October 2026</p></div></section><section class="band"><div class="wrap read"><p>This notice explains how Intrinsic Consulting Solutions ("ICS", "we", "us") collects and uses personal information through this website and when we deal with you. We process personal information in line with the Protection of Personal Information Act 4 of 2013 (POPIA).</p><h2>1. Who we are</h2><p>ICS is an outsourced HR, industrial relations and recruitment consultancy.</p><ul><li>Address: 18 Ebony Road, Tokai, Cape Town, 7945</li><li>Email: admin@icsol.co.za</li><li>Phone: 082 921 9965 (Cape Town), 079 103 2490 (Johannesburg)</li></ul><p><strong>Information Officer:</strong> Mark Meredith, admin@icsol.co.za</p><h2>2. What we collect</h2><p><strong>When you book an HR Health Check or contact us:</strong> your name, business name, email address, phone number, number of employees, the reason you're getting in touch, anything you choose to tell us in the message field, and a record of your consent.</p><p><strong>When you request the HR compliance checklist:</strong> your work email address.</p><p><strong>When you apply for a role or send us your CV:</strong> the details in your CV and any supporting documents, such as your work history, qualifications and contact details.</p><p><strong>When you use the website:</strong> if you accept analytics cookies, anonymous usage data such as the pages you visit, your device and browser type, and how you arrived at the site. We don't use this data to identify you.</p><p><strong>When we work with your business:</strong> to deliver HR services, we may process personal information about your employees, such as contracts, disciplinary records and performance information. In that role we act on your instructions, under a written agreement with you.</p><h2>3. Why we use it</h2><p>We use your personal information to:</p><ul><li>respond to your enquiry and set up your HR Health Check</li><li>send you the checklist or other resources you asked for</li><li>deliver and manage HR and recruitment services</li><li>consider you for vacancies you applied for or that match your profile</li><li>keep records we are legally required to keep</li><li>improve the website, if you have accepted analytics cookies</li></ul><p>We process personal information on these grounds: your consent, the need to take steps toward or carry out a contract with you, our legal obligations, or our legitimate interest in running and improving our business.</p><h2>4. Marketing</h2><p>We will only send you marketing emails, such as HR updates and articles, if you have agreed to receive them or you are an existing client and we're telling you about similar services. Every marketing email includes a way to unsubscribe, and you can also email admin@icsol.co.za at any time.</p><h2>5. Who we share it with</h2><p>We don't sell personal information. We share it only with:</p><ul><li>service providers who help us run the business, such as our CRM, email, website hosting and analytics providers, under agreements that require them to keep it secure and confidential</li><li>prospective employers, when you apply for a role and agree to us putting you forward</li><li>professional advisers, the CCMA, courts or authorities, where the law requires it or it's needed to protect a client's or our legal rights</li></ul><h2>6. Information sent outside South Africa</h2><p>Some of our service providers store data on servers outside South Africa. We only use providers in countries with adequate data protection laws, or who are bound by agreements giving your information protection substantially similar to POPIA.</p><h2>7. How long we keep it</h2><ul><li>Enquiries that don't turn into work: up to 12 months after our last contact</li><li>Client records: for the duration of the engagement and up to 5 years afterwards, or longer if the law requires it</li><li>CVs and candidate information: up to 24 months, unless you ask us to delete them sooner</li></ul><p>After that, we delete or anonymise it.</p><h2>8. How we keep it safe</h2><p>We use reasonable technical and organisational measures to protect personal information against loss, misuse and unauthorised access. These include access controls, secure systems and confidentiality obligations for our team and service providers. If a security compromise affects your personal information, we will notify you and the Information Regulator as POPIA requires.</p><h2>9. Cookies</h2><p>The website uses essential cookies to work properly. We only use analytics cookies, and only load chat, if you accept them in the cookie banner. You can change your choice at any time by clearing your browser cookies and revisiting the site.</p><h2>10. Your rights</h2><p>Under POPIA you have the right to:</p><ul><li>ask whether we hold personal information about you, and request a copy</li><li>ask us to correct, update or delete it</li><li>object to us processing it, including for direct marketing</li><li>withdraw your consent at any time, without affecting processing already done</li><li>lodge a complaint with the Information Regulator</li></ul><p>To exercise any of these rights, email the Information Officer at admin@icsol.co.za. We will respond within a reasonable time and may need to confirm your identity first.</p><h2>11. Complaints</h2><p>If you're unhappy with how we've handled your personal information, please contact us first so we can try to resolve it. You can also complain to the Information Regulator (South Africa) at inforegulator.org.za.</p><h2>12. Changes to this notice</h2><p>We may update this notice from time to time. The date at the top shows when it last changed.</p></div></section>'''
 
 
 def faq_schema() -> dict:
@@ -437,11 +445,22 @@ def write_support_files() -> None:
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .page-hero{background:var(--band);color:var(--band-fg);padding-block:clamp(56px,9vw,110px)}.page-hero .eyebrow{color:var(--ochre)}.page-hero h1{margin-top:12px;max-width:25ch}.page-hero .lede{color:var(--band-soft);margin-top:18px}
-.service-list{margin:14px 0 0;padding-left:1.2em;display:grid;gap:10px}.service-list li::marker{color:var(--ochre-ink)}.job-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.job-smallprint{margin-top:14px;font-size:.9rem;color:var(--ink-soft)}
-.cookie-banner[hidden]{display:none!important}
 .footer-grid{display:grid!important;grid-template-columns:repeat(3,1fr) 1.2fr;align-items:start}.footer-grid>div{display:grid;gap:4px}.footer-grid strong{color:var(--band-fg)}.footer-grid .copyright{align-self:end}@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr!important}.footer-grid .copyright{grid-column:1/-1}}
 .service-card-link{display:grid;gap:10px;align-content:start;color:inherit;text-decoration:none;min-height:100%}.service-card-link .more{font-weight:600;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:4px}.service-detail{display:grid;grid-template-columns:1fr 1fr;gap:40px}.service-team{grid-column:1/-1;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px}.service-team h2{margin-top:8px}.review-note{display:inline-block;background:var(--ochre-wash);color:var(--ochre-ink);padding:8px 10px;border-radius:var(--r);font-family:var(--f-mono);font-size:.82rem;line-height:1.4}.closing-cta{text-align:center}.closing-cta .steps-cta{justify-content:center}.honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important}.lead-form [data-form-message][data-state="error"]{color:#b3261e}.lead-form [data-form-message][data-state="success"]{background:var(--ochre-wash);padding:12px;border-radius:var(--r);color:var(--ok)}
 .ins-hero{background:var(--band);color:var(--band-fg);padding-block:clamp(48px,7vw,88px)}.ins-hero .eyebrow{color:var(--ochre)}.ins-hero h1{margin-top:12px;max-width:20ch}.ins-hero .lede{color:var(--band-soft);margin-top:16px}.compact-hero{padding-block:32px}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}.chip{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer}.chip.on{background:var(--band);border-color:var(--band);color:var(--band-fg)}.feature{display:grid;grid-template-columns:.8fr 1.2fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;background:var(--surface);margin-bottom:28px}.feature-art{background:var(--band);color:var(--band-fg);display:grid;place-content:center;gap:6px;text-align:center;padding:40px 20px;font-family:var(--f-mono);letter-spacing:.14em;font-size:.8rem}.feature-art b{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,4vw,3rem);letter-spacing:0;color:var(--ochre)}.feature-body{padding:clamp(22px,3vw,36px);display:grid;gap:12px;align-content:center}.feature-body h2{font-size:clamp(1.5rem,2.6vw,2rem)}.feature-body p,.card p{color:var(--ink-soft)}.meta{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ochre-ink)}.more{font-weight:600;text-decoration:underline;text-decoration-color:var(--ochre);text-underline-offset:4px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{display:grid;gap:10px;align-content:start;padding:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:inherit}.card.soon{background:transparent;border-style:dashed}.card.soon .meta{color:var(--ink-soft)}.read{max-width:760px}.back{display:inline-block;margin-bottom:24px;font-weight:600;text-decoration:none;color:var(--ochre-ink)}.read h1{font-size:clamp(2rem,4vw,2.9rem);margin-top:10px}.standfirst{font-size:1.2rem;color:var(--ink-soft);margin-top:18px;padding-bottom:24px;border-bottom:1px solid var(--line)}.read h2{font-size:1.45rem;margin-top:36px;margin-bottom:10px}.read p+p{margin-top:14px}.read ul,.read ol{padding-left:1.2em;display:grid;gap:8px;margin:12px 0}.dates{width:100%;border-collapse:collapse;margin:12px 0 16px;font-variant-numeric:tabular-nums}.dates th,.dates td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}.dates th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}.checklist{margin-top:36px;background:var(--ochre-wash);border-radius:10px;padding:24px}.checklist h3{font-size:1.25rem}.checklist ul{list-style:none;padding:0}.checklist li{padding-left:28px;position:relative}.checklist li::before{content:"";position:absolute;left:0;top:.35em;width:16px;height:16px;border:2px solid var(--ochre-ink);border-radius:3px}.post-cta{margin-top:36px;background:var(--band);color:var(--band-fg);border-radius:10px;padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}.post-cta>div{flex:1 1 300px;min-width:0}.post-cta p{color:var(--band-soft);margin-top:6px}.disclaimer{margin-top:24px;font-size:.85rem;color:var(--ink-soft)}.magnet-band{background:var(--surface);border-top:1px solid var(--line)}.magnet-band .magnet{margin-top:0}.map-band iframe{width:100%;min-height:420px;border:1px solid var(--line);border-radius:10px}.vacancies{max-width:760px}.cookie-banner{position:fixed;z-index:100;right:16px;bottom:16px;width:min(520px,calc(100% - 32px));display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);color:var(--ink);box-shadow:0 14px 40px rgba(29,23,77,.25);border:1px solid var(--line);border-radius:10px;padding:16px}.cookie-banner p{font-size:.9rem;max-width:36ch}.cookie-banner div{display:flex;gap:8px}.chat-launcher{position:fixed;right:20px;bottom:20px;z-index:80;border:0;border-radius:999px;background:var(--ochre);color:var(--on-accent);padding:12px 18px;font:600 1rem var(--f-body);box-shadow:0 8px 24px rgba(29,23,77,.25);cursor:pointer}.cookie-banner[hidden]~.chat-launcher{bottom:20px}@media(max-width:900px){.feature{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.service-detail{grid-template-columns:1fr}.service-team{grid-column:auto}}@media(max-width:560px){.cards{grid-template-columns:1fr}.cookie-banner{left:16px;right:16px;width:auto}.cookie-banner .btn{padding:.7em 1em}}
+'''
+    additions += '''
+/* Direct Placement Partner embeds: provider-owned content remains unchanged. */
+.placement-partner-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.placement-partner-section{scroll-margin-top:100px}.placement-partner-section h2{margin-bottom:24px}
+.placement-partner-embed{width:100%;min-width:0;height:1100px;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;color-scheme:light}
+.placement-partner-embed--cv{height:1700px}.placement-partner-embed iframe{display:block;width:100%;height:100%;min-width:0;border:0}
+.placement-partner-notice{color:var(--ink-soft);margin-bottom:24px;max-width:70ch}.placement-partner-fallback{margin-top:20px;font-size:.95rem}
+@media(max-width:760px){.placement-partner-embed{height:1400px}.placement-partner-embed--cv{height:2200px}}
+'''
+    additions += '''
+/* Consent visibility and footer preference control. */
+.cookie-banner[hidden]{display:none!important}.cookie-settings-link{font-size:.85em}
 '''
     (OUT / "css" / "styles.css").write_text(styles + additions, encoding="utf-8")
     insights_additions = '\n/* Production article route modifier. */\n.compact-hero{padding-block:32px}\n.article-page,.post-view,.ins-index{background:var(--paper)}\n'
@@ -454,7 +473,6 @@ def write_support_files() -> None:
     shutil.copytree(ASSET_SOURCE, OUT / "assets" / "img", dirs_exist_ok=True)
     shutil.copytree(ROOT / "assets" / "fonts", OUT / "assets" / "fonts", dirs_exist_ok=True)
     (OUT / "manus-routes.json").write_text(json.dumps({"routes": [{"path": path, "title": title} for path, title in ROUTES]}, indent=2), encoding="utf-8")
-    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n", encoding="utf-8")
     sitemap_entries = "\n".join(f"  <url><loc>{BASE_URL}{path}</loc></url>" for path, _ in ROUTES)
     (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{sitemap_entries}\n</urlset>\n', encoding="utf-8")
     llms = "# Intrinsic Consulting Solutions\n\nOutsourced and fractional HR for South African small to medium-sized businesses.\n\n" + "\n".join(f"- {BASE_URL}{path}: {title}" for path, title in ROUTES) + "\n"
@@ -516,9 +534,10 @@ def main() -> None:
         title, meta = ARTICLE_META[article_id]
         write_route(route, document(f"{title} | ICS", meta, route, article_content, "insights", [article_schema], include_insights_css=True))
     write_route("/job-seekers/", document("Job seekers | Outsourced HR | ICS", "Recruitment opportunities for skilled and professional positions across South Africa.", "/job-seekers/", job_seekers_page(), "jobs"))
+    write_route("/job-seekers/submit-cv/", document("Submit your CV | ICS", "Submit your CV directly to ICS through Placement Partner.", "/job-seekers/submit-cv/", submit_cv_page(), "jobs"))
     write_route("/contact/", document("Contact | Outsourced HR | ICS", "Contact ICS in Cape Town or Johannesburg to book an HR Health Check.", "/contact/", contact_page(reference_home), ""))
     write_route("/privacy/", document("Privacy | Outsourced HR | ICS", "ICS POPIA privacy notice.", "/privacy/", privacy_page(), ""))
-    not_found = document("Page not found | ICS", "The page you requested could not be found.", "/404", '<section class="page-hero"><div class="wrap"><h1>We couldn\'t find that page.</h1><p class="lede">It may have moved when we updated our website.</p><p class="steps-cta"><a class="btn btn-primary" href="/">Go to the home page</a><a class="btn btn-ghost" href="/hr-health-check/">Book an HR Health Check</a></p></div></section>')
+    not_found = document("Page not found | ICS", "The page you're looking for has moved or doesn't exist.", "/404", '<section class="page-hero"><div class="wrap"><h1>Page not found</h1><p class="lede">The page you\'re looking for has moved or doesn\'t exist.</p><p class="steps-cta"><a class="btn btn-primary" href="/">Home</a><a class="btn btn-ghost" href="/services/">Services</a><a class="btn btn-ghost" href="/hr-health-check/">Book an HR Health Check</a></p></div></section>', robots="noindex")
     (OUT / "404.html").write_text(not_found, encoding="utf-8")
     print(f"Built {len(ROUTES)} routes in {OUT}")
 
